@@ -1,0 +1,8 @@
+a.out
+a.exe
+*.h.gch
+test1
+test2
+test3
+*.o
+*.a

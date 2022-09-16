@@ -1,0 +1,20 @@
+# System files
+.DS_Store
+.vscode/
+
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Executables
+*.out
+push_swap
+
+# Temp files
+*.swp
+
+# Debug files
+*.dSYM/
