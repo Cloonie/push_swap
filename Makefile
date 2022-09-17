@@ -6,7 +6,7 @@
 #    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/09/16 17:21:19 by mliew            ###   ########.fr        #
+#    Updated: 2022/09/17 19:36:16 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 SRCS	=	main.c
 OBJS	=	$(SRCS:.c=.o)
-LIBFT	=	-Llibft -lft
+LIB42	=	lib42
+LDFLAGS	=	-Llib42
+LDLIBS	=	-l42
 SANITIZE=	-fsanitize=address -g3
 
 all: $(NAME)
@@ -25,15 +27,13 @@ all: $(NAME)
 	$(CC) -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(OBJS)
-	make -C libft
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) #$(SANITIZE)
+	make -C $(LIB42)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME) #$(SANITIZE)
 
 clean:
-	$(RM) $(OBJS)
-	make clean -C libft
+	make clean -C $(LIB42)
 
 fclean: clean
-	$(RM) $(NAME) $(ARCLIB)
-	make fclean -C libft
+	make fclean -C $(LIB42)
 
 re: fclean all
