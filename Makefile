@@ -6,7 +6,7 @@
 #    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/09/17 19:36:16 by mliew            ###   ########.fr        #
+#    Updated: 2022/09/19 18:27:17 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS	=	main.c
 OBJS	=	$(SRCS:.c=.o)
 LIB42	=	lib42
 LDFLAGS	=	-Llib42
-LDLIBS	=	-l42
+LDLIBS	=	-lft
 SANITIZE=	-fsanitize=address -g3
 
 all: $(NAME)
@@ -35,5 +35,6 @@ clean:
 
 fclean: clean
 	make fclean -C $(LIB42)
+	$(RM) push_swap *.o
 
 re: fclean all
