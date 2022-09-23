@@ -6,11 +6,43 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/22 21:05:24 by mliew            ###   ########.fr       */
+/*   Updated: 2022/09/23 17:35:34 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*new_node(int value)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	new->value = value;
+	new->index = 0;
+	new->pos = 0;
+	new->target_pos = 0;
+	new->cost_a = 0;
+	new->cost_b = 0;
+	new->next = NULL;
+	return (new);
+}
+
+t_stack	*fill_stack(int ac, char **av)
+{
+	int		i;
+	t_stack	*head;
+	t_stack	*tmp;
+
+	i = 0;
+	head = NULL;
+	// if (ac == 2)
+	// 	return (av[1]);
+	while (++i < ac)
+	{
+		tmp = new_node(ft_atoi(av[1]));
+		ft_lstadd_back(head, &tmp);
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -18,15 +50,6 @@ int	main(int ac, char **av)
 	t_stack	*stacka;
 	t_stack	*stackb;
 
-	stacka = ft_split(av[1]);
+	stacka = fill_stack(ac, av);
 	stackb = NULL;
-	i = 1;
-	while (ac > 1 && av[i])
-	{
-		if (atoi(av[i]) == atoi(av[i - 1]))
-			exit (0);
-		ft_printf("%d\n", atoi(av[i]));
-		i++;
-	}
-	// write (1, "\n", 1);
 }
