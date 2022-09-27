@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/22 18:01:11 by mliew            ###   ########.fr       */
+/*   Updated: 2022/09/26 18:51:35 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,5 @@
 # include "lib42/includes/ft_printf.h"
 # include "lib42/includes/get_next_line_bonus.h"
 
-typedef struct s_stack
-{
-	int				value;
-	int				index;
-	int				pos;
-	int				target_pos;
-	int				cost_a;
-	int				cost_b;
-	struct s_stack	*next;
-}	t_stack;
 
 #endif

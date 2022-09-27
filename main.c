@@ -6,50 +6,33 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/23 17:35:34 by mliew            ###   ########.fr       */
+/*   Updated: 2022/09/27 18:03:02 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*new_node(int value)
-{
-	t_stack	*new;
-
-	new = malloc(sizeof(t_stack));
-	new->value = value;
-	new->index = 0;
-	new->pos = 0;
-	new->target_pos = 0;
-	new->cost_a = 0;
-	new->cost_b = 0;
-	new->next = NULL;
-	return (new);
-}
-
-t_stack	*fill_stack(int ac, char **av)
+t_list	*fill_stack(int ac, char **av)
 {
 	int		i;
-	t_stack	*head;
-	t_stack	*tmp;
+	t_list	*head;
+	t_list	*tmp;
 
 	i = 0;
 	head = NULL;
-	// if (ac == 2)
-	// 	return (av[1]);
 	while (++i < ac)
 	{
-		tmp = new_node(ft_atoi(av[1]));
-		ft_lstadd_back(head, &tmp);
+		tmp = ft_lstnew(av[i]);
+		ft_lstadd_back(&head, tmp);
 	}
+	return (head);
 }
 
 int	main(int ac, char **av)
 {
-	int		i;
-	t_stack	*stacka;
-	t_stack	*stackb;
+	t_list	*stacka;
 
 	stacka = fill_stack(ac, av);
-	stackb = NULL;
+	printf("%d\n", stacka->value);
+	printf("%d\n", stacka->next->value);
 }
