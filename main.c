@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/28 18:43:57 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/17 21:43:39 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,19 @@ t_list	*fill_stack(int ac, char **av)
 	int		i;
 	t_list	*head;
 	t_list	*tmp;
-
 	char	**array;
-	int		j = 0;
 
 	i = 0;
 	head = NULL;
 	if (ac == 2)
 	{
 		array = ft_split(av[1], ' ');
-		while (array[j] != NULL)
+		while (array[i] != NULL)
 		{
-			if (check_arg(array[j]) != 1)
+			if (check_arg(array[i]) != 1)
 				errormsg();
-			tmp = ft_lstnew(array[j++]);
+			tmp = ft_lstnew(array[i++]);
+			tmp->pos = i;
 			ft_lstadd_back(&head, tmp);
 		}
 		return (head);
@@ -82,9 +81,37 @@ t_list	*fill_stack(int ac, char **av)
 		if (check_arg(av[i]) != 1)
 			errormsg();
 		tmp = ft_lstnew(av[i]);
+		tmp->pos = i;
 		ft_lstadd_back(&head, tmp);
 	}
 	return (head);
+}
+
+void	check_dup(t_list *stack)
+{
+	t_list *tmp;
+
+	tmp = stack;
+	if (stack == NULL)
+		return ;
+	while (tmp->next != NULL)
+	{
+		if (stack->value == tmp->next->value)
+			errormsg();
+		tmp = tmp->next;
+	}
+	check_dup(stack->next);
+}
+
+void	assign_index(t_list *stack)
+{
+	t_list	*tmp;
+	int		i;
+	
+	tmp = stack;
+	i = 1;
+	tmp->index = i;
+	tmp = tmp->next;
 }
 
 int	main(int ac, char **av)
@@ -92,9 +119,11 @@ int	main(int ac, char **av)
 	t_list	*stacka;
 
 	stacka = fill_stack(ac, av);
+	check_dup(stacka);
+	assign_index(stacka);
 	while (stacka)
 	{
-		printf("%d\n", stacka->value);
+		printf("Value: %d, Index: %d, Pos: %d\n", stacka->value, stacka->index, stacka->pos);
 		stacka = stacka->next;
 	}
 }
