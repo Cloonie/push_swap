@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/17 21:43:39 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/18 16:19:25 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,45 @@ void	check_dup(t_list *stack)
 	check_dup(stack->next);
 }
 
-void	assign_index(t_list *stack)
+t_list	*assign_index(t_list *stack, int index)
 {
-	t_list	*tmp;
-	int		i;
-	
-	tmp = stack;
-	i = 1;
-	tmp->index = i;
-	tmp = tmp->next;
+	t_list			*head;
+	t_list			*max;
+	long long int	max_int;
+
+	head = stack;
+	while (--index > 0)
+	{
+		max_int = LLONG_MIN;
+		// stack = head;
+		printf("%p\n", stack);
+		printf("%p\n", head);
+		while (stack)
+		{
+			if (stack->value == max_int && !(stack->index))
+				return (NULL);
+			if (stack->value > max_int && !(stack->index))
+			{
+				max_int = stack->value;
+				max = stack;
+			}
+			stack = stack->next;
+		}
+		if (!(max->index))
+			max->index = index;
+	}
+	return (head);
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*stacka;
 
+	if (ac == 1)
+		return (0);
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
-	assign_index(stacka);
+	assign_index(stacka, ac);
 	while (stacka)
 	{
 		printf("Value: %d, Index: %d, Pos: %d\n", stacka->value, stacka->index, stacka->pos);
