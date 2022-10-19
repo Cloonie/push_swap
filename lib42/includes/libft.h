@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/27 17:22:04 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/19 18:25:25 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 {
 	void			*content;
 	int				value;
+	int				size;
 	int				index;
 	int				pos;
 	int				target_pos;

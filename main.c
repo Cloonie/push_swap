@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/18 16:19:25 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/19 21:37:07 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_list	*fill_stack(int ac, char **av)
 			tmp->pos = i;
 			ft_lstadd_back(&head, tmp);
 		}
+		head->size = i + 1;
 		return (head);
 	}
 	while (++i < ac)
@@ -84,12 +85,13 @@ t_list	*fill_stack(int ac, char **av)
 		tmp->pos = i;
 		ft_lstadd_back(&head, tmp);
 	}
+	head->size = i;
 	return (head);
 }
 
 void	check_dup(t_list *stack)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = stack;
 	if (stack == NULL)
@@ -106,16 +108,14 @@ void	check_dup(t_list *stack)
 t_list	*assign_index(t_list *stack, int index)
 {
 	t_list			*head;
-	t_list			*max;
+	t_list			*biggest_value;
 	long long int	max_int;
 
 	head = stack;
 	while (--index > 0)
 	{
 		max_int = LLONG_MIN;
-		// stack = head;
-		printf("%p\n", stack);
-		printf("%p\n", head);
+		stack = head;
 		while (stack)
 		{
 			if (stack->value == max_int && !(stack->index))
@@ -123,12 +123,12 @@ t_list	*assign_index(t_list *stack, int index)
 			if (stack->value > max_int && !(stack->index))
 			{
 				max_int = stack->value;
-				max = stack;
+				biggest_value = stack;
 			}
 			stack = stack->next;
 		}
-		if (!(max->index))
-			max->index = index;
+		if (!(biggest_value->index))
+			biggest_value->index = index;
 	}
 	return (head);
 }
@@ -141,10 +141,11 @@ int	main(int ac, char **av)
 		return (0);
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
-	assign_index(stacka, ac);
+	assign_index(stacka, stacka->size);
 	while (stacka)
 	{
-		printf("Value: %d, Index: %d, Pos: %d\n", stacka->value, stacka->index, stacka->pos);
+		printf("Value: %d, Index: %d, Pos: %d\n",
+			stacka->value, stacka->index, stacka->pos);
 		stacka = stacka->next;
 	}
 }
