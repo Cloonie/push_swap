@@ -6,7 +6,7 @@
 #    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/09/19 18:27:17 by mliew            ###   ########.fr        #
+#    Updated: 2022/10/25 18:29:00 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	push_swap
 RM		=	rm -rf
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-SRCS	=	main.c
+SRCS	=	main.c operators.c
 OBJS	=	$(SRCS:.c=.o)
 LIB42	=	lib42
 LDFLAGS	=	-Llib42
