@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/25 19:02:01 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/25 19:15:06 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	main(int ac, char **av)
 {
 	t_list	*stacka;
 	t_list	*stackb;
-	t_list	*tmp;
 	int		size;
 
 	stackb = NULL;
@@ -155,20 +154,11 @@ int	main(int ac, char **av)
 	check_dup(stacka);
 	size = stacka->size;
 	assign_index(stacka, size);
-	tmp = stacka;
-	while (tmp)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			tmp->value, tmp->index, tmp->pos);
-		tmp = tmp->next;
-	}
-	printf("\n");
 	sort_stacks(stacka, stackb, size);
-	tmp = stacka;
-	while (tmp)
+	while (stacka)
 	{
 		printf("Value: %d, Index: %d, Pos: %d\n",
-			tmp->value, tmp->index, tmp->pos);
-		tmp = tmp->next;
+			stacka->value, stacka->index, stacka->pos);
+		stacka = stacka->next;
 	}
 }

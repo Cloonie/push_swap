@@ -6,23 +6,24 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/25 19:01:27 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/25 20:36:35 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*swap_a(t_list *stacka)
+void	swap_a(t_list *stacka)
 {
 	t_list	*tmp;
-	t_list	*new;
+	t_list	*first;
+	t_list	*second;
 
-	new = stacka;
 	tmp = stacka->next;
-	new = tmp;
-	new = new->next;
-	new = stacka;
-	return (new);
+	first = stacka;
+	second = tmp;
+	stacka = first;
+	stacka = stacka->next;
+	stacka = second;
 }
 
 // void	swap_b()
