@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/25 19:15:06 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/28 10:29:49 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ t_list	*assign_index(t_list *stack, int index)
 	return (head);
 }
 
-void	sort_stacks(t_list *stacka, t_list *stackb, int size)
+void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
 	if (size == 4)
-		swap_a(stacka);
+		swap(stacka, 'a');
 	(void)stackb;
 }
 
@@ -154,7 +154,7 @@ int	main(int ac, char **av)
 	check_dup(stacka);
 	size = stacka->size;
 	assign_index(stacka, size);
-	sort_stacks(stacka, stackb, size);
+	sort_stacks(&stacka, &stackb, size);
 	while (stacka)
 	{
 		printf("Value: %d, Index: %d, Pos: %d\n",

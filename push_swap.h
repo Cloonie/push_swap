@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/25 20:36:50 by mliew            ###   ########.fr       */
+/*   Updated: 2022/10/28 10:29:37 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include "lib42/includes/ft_printf.h"
 # include "lib42/includes/get_next_line_bonus.h"
 
-void	swap_a(t_list *stacka);
+void	swap(t_list **stacka, int c);
 
 #endif
