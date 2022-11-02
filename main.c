@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/28 10:29:49 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/02 17:53:25 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
 	if (size == 4)
 		swap(stacka, 'a');
+	if (size == 5)
+		push(stacka, stackb, 'b');
 	(void)stackb;
 }
 
@@ -155,10 +157,20 @@ int	main(int ac, char **av)
 	size = stacka->size;
 	assign_index(stacka, size);
 	sort_stacks(&stacka, &stackb, size);
+	printf("\nStack A:\n");
 	while (stacka)
 	{
 		printf("Value: %d, Index: %d, Pos: %d\n",
 			stacka->value, stacka->index, stacka->pos);
 		stacka = stacka->next;
 	}
+	printf("\nStack B:\n");
+	while (stackb)
+	{
+		printf("Value: %d, Index: %d, Pos: %d\n",
+			stackb->value, stackb->index, stackb->pos);
+		stackb = stackb->next;
+	}
+	if (stackb == NULL)
+		printf("NULL\n");
 }

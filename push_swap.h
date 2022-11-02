@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/28 10:29:37 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/02 17:53:19 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include "lib42/includes/get_next_line_bonus.h"
 
 void	swap(t_list **stacka, int c);
+void	push(t_list **from, t_list **pushto, int c);
 
 #endif
