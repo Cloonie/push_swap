@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/02 17:53:25 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:28:02 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,9 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 	if (size == 4)
 		swap(stacka, 'a');
 	if (size == 5)
-		push(stacka, stackb, 'b');
+		rotate(stacka, 'a');
+	if (size == 6)
+		reverse_rotate(stacka, 'a');
 	(void)stackb;
 }
 

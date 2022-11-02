@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/02 17:53:19 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:28:13 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "lib42/includes/get_next_line_bonus.h"
 
 void	swap(t_list **stacka, int c);
+void	rotate(t_list **stack, int c);
+void	reverse_rotate(t_list **stack, int c);
 void	push(t_list **from, t_list **pushto, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/03 00:52:41 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/03 01:30:06 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,50 @@ void	swap(t_list **stack, int c)
 		ft_printf("sb\n");
 }
 
-void	push(t_list **from, t_list **pushto, int c)
+void	rotate(t_list **stack, int c)
 {
 	t_list	*tmp;
-	t_list	*head;
+	t_list	*tail;
 
-	tmp = *from;
-	*pushto = tmp;
-	
-	(*pushto)->next = head;
-	set_position (*pushto);
-	set_position (*from);
+	if (!(*stack))
+		return ;
+	tmp = *stack;
+	*stack = (*stack)->next;
+	tail = ft_lstlast(*stack);
+	tail->next = tmp;
+	tmp->next = NULL;
+	set_position (*stack);
 	if (c == 'a')
-		ft_printf("pa\n");
+		ft_printf("ra\n");
 	else if (c == 'b')
-		ft_printf("pb\n");
+		ft_printf("rb\n");
 }
 
-// void	rotate_a()
-// void	rotate_b()
-// void	rr()
+void	reverse_rotate(t_list **stack, int c)
+{
+	t_list	*tmp;
+	t_list	*tail;
 
-// void	reverse_rotate_a()
-// void	reverse_rotate_b()
-// void	rrr()
+	tail = ft_lstlast(*stack);
+	tmp = *stack;
+	while (tmp->next->next)
+		tmp = tmp->next;
+	tmp->next = NULL;
+	tail->next = *stack;
+	*stack = tail;
+	set_position (*stack);
+	if (c == 'a')
+		ft_printf("rra\n");
+	else if (c == 'b')
+		ft_printf("rrb\n");
+}
+
+// void	push(t_list **from, t_list **pushto, int c)
+// {
+// 	set_position (*pushto);
+// 	set_position (*from);
+// 	if (c == 'a')
+// 		ft_printf("pa\n");
+// 	else if (c == 'b')
+// 		ft_printf("pb\n");
+// }
