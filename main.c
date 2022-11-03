@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/03 21:24:15 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/03 21:33:57 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	sort_three(t_list **stacka)
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
+	if (size == 3)
+		if((*stacka)->index != 1)
+			swap(stacka, 'a');
 	if (size == 4)
 		sort_three(stacka);
 	(void)stackb;
