@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/03 01:28:13 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/03 20:56:44 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include "lib42/includes/ft_printf.h"
 # include "lib42/includes/get_next_line_bonus.h"
 
+// functions.c
+void	errormsg(void);
+int		check_num(char *arg);
+int		check_arg(char *arg);
+t_list	*fill_stack(int ac, char **av);
+void	check_dup(t_list *stack);
+t_list	*assign_index(t_list *stack, int index);
+void	set_position(t_list *stack);
+
+// operators.c
 void	swap(t_list **stacka, int c);
 void	rotate(t_list **stack, int c);
 void	reverse_rotate(t_list **stack, int c);
