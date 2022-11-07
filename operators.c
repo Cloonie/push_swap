@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/05 22:37:31 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/08 01:00:08 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,25 @@ void	push(t_list **from, t_list **pushto, int c)
 		ft_printf("pa\n");
 	else if (c == 'b')
 		ft_printf("pb\n");
+}
+
+void	ss(t_list **stacka, t_list **stackb, int c)
+{
+	swap(stacka, c);
+	swap(stackb, c);
+	ft_printf("ss\n");
+}
+
+void	rr(t_list **stacka, t_list **stackb, int c)
+{
+	rotate(stacka, c);
+	rotate(stackb, c);
+	ft_printf("rr\n");
+}
+
+void	rrr(t_list **stacka, t_list **stackb, int c)
+{
+	reverse_rotate(stacka, c);
+	reverse_rotate(stackb, c);
+	ft_printf("rrr\n");
 }

@@ -75,7 +75,7 @@ t_list	*fill_stack(int ac, char **av)
 			tmp->pos = i;
 			ft_lstadd_back(&head, tmp);
 		}
-		head->size = i + 1;
+		head->size = i;
 		return (head);
 	}
 	while (++i < ac)
@@ -86,7 +86,7 @@ t_list	*fill_stack(int ac, char **av)
 		tmp->pos = i;
 		ft_lstadd_back(&head, tmp);
 	}
-	head->size = i;
+	head->size = i - 1;
 	return (head);
 }
 
@@ -113,6 +113,7 @@ t_list	*assign_index(t_list *stack, int index)
 	long long int	max_int;
 
 	head = stack;
+	index += 1;
 	while (--index > 0)
 	{
 		max_int = LLONG_MIN;

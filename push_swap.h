@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/03 20:56:44 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/08 00:59:23 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ void	swap(t_list **stacka, int c);
 void	rotate(t_list **stack, int c);
 void	reverse_rotate(t_list **stack, int c);
 void	push(t_list **from, t_list **pushto, int c);
+void	ss(t_list **stacka, t_list **stackb, int c);
+void	rr(t_list **stacka, t_list **stackb, int c);
+void	rrr(t_list **stacka, t_list **stackb, int c);
 
 #endif

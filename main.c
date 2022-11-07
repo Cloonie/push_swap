@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/05 22:54:26 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/08 02:06:54 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,48 @@ void	sort_three(t_list **stacka)
 		if ((*stacka)->index == 2)
 			swap(stacka, 'a');
 		if ((*stacka)->index == 1 && (*stacka)->next->index == 3)
-			rotate(stacka, 'a');
+			swap(stacka, 'a');
 		i++;
 	}
 }
 
+void	sort(t_list **stacka, t_list **stackb, int size)
+{
+	// int	half;
+
+	// half = size / 2;
+	int i = 1;
+	int num = 0;
+	while (size)
+	{
+		if ((*stacka)->index == i)
+		{
+			push(stacka, stackb, 'b');
+			size--;
+			i++;
+		}
+		else
+			rotate(stacka, 'a');
+		num++;
+	}
+	i -= 1;
+	while (i--)
+	{
+		push(stackb, stacka, 'a');
+		num++;
+	}
+	printf("Instructions: %d\n", num);
+}
+
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
-	if (size == 3)
+	if (size == 2)
 		if ((*stacka)->index != 1)
-			swap(stacka, 'a');
-	if (size == 4)
+			swap(stacka, 'c');
+	if (size == 3)
 		sort_three(stacka);
-	(void)stackb;
+	if (size >= 4)
+		sort(stacka, stackb, size);
 }
 
 int	main(int ac, char **av)
