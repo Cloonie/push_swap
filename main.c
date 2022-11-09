@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/08 02:06:54 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/09 22:03:10 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,43 +31,56 @@ void	sort_three(t_list **stacka)
 	}
 }
 
-void	sort(t_list **stacka, t_list **stackb, int size)
-{
-	// int	half;
+// void	sort(t_list **stacka, t_list **stackb, int size)
+// {
+// 	int	i = 1;
+// 	int	num = 0;
 
-	// half = size / 2;
-	int i = 1;
-	int num = 0;
-	while (size)
+// 	while (size)
+// 	{
+// 		if ((*stacka)->index == i)
+// 		{
+// 			push(stacka, stackb, 'b');
+// 			size--;
+// 			i++;
+// 		}
+// 		else
+// 			rotate(stacka, 'a');
+// 		num++;
+// 	}
+// 	i -= 1;
+// 	while (i--)
+// 	{
+// 		push(stackb, stacka, 'a');
+// 		num++;
+// 	}
+// 	printf("Instructions: %d\n", num);
+// }
+
+void	sort2(t_list **stacka, t_list **stackb, int size)
+{
+	int	half;
+
+	half = size / 2;
+	while (ft_lstsize(*stackb) != half)
 	{
-		if ((*stacka)->index == i)
-		{
+		if ((*stacka)->index <= half)
 			push(stacka, stackb, 'b');
-			size--;
-			i++;
-		}
 		else
 			rotate(stacka, 'a');
-		num++;
 	}
-	i -= 1;
-	while (i--)
-	{
-		push(stackb, stacka, 'a');
-		num++;
-	}
-	printf("Instructions: %d\n", num);
+	
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
 	if (size == 2)
 		if ((*stacka)->index != 1)
-			swap(stacka, 'c');
+			swap(stacka, 'a');
 	if (size == 3)
 		sort_three(stacka);
 	if (size >= 4)
-		sort(stacka, stackb, size);
+		sort2(stacka, stackb, size);
 }
 
 int	main(int ac, char **av)
