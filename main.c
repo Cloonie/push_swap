@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/11 16:26:20 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/11 22:36:45 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,22 @@ void	sort_array(int *arr, int s)
 	}
 }
 
-void	quick_sort(t_list **stacka, t_list **stackb, int size)
+void	quick_sort_a(t_list **stacka, t_list **stackb)
 {
-	int	half;
 	int	median;
 
-	half = (size / 2) + (size % 2);
-	while (ft_lstsize(*stackb) != half)
+	median = (ft_lstsize(*stacka) / 2) + (ft_lstsize(*stacka) % 2);
+	printf("MEDIAN: %d\n", median);
+	if (median == 1 || median == 2)
+		return ;
+	while (ft_lstsize(*stacka) != median)
 	{
-		if (*stackb)
-			median = size + half;
-		if ((*stacka)->index <= half)
+		if ((*stacka)->index < median + ft_lstsize(*stacka))
 			push(stacka, stackb, 'b');
 		else
 			rotate(stacka, 'a');
 	}
-	// if (half == 3 || half == 2)
-	// 	return ;
-	// quick_sort(stacka, stackb, half);
+	quick_sort_a(stacka, stackb);
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
@@ -113,7 +111,7 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 	if (size == 3)
 		sort_three(stacka);
 	if (size >= 4)
-		quick_sort(stacka, stackb, size);
+		quick_sort_a(stacka, stackb);
 }
 
 int	main(int ac, char **av)
