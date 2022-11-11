@@ -19,3 +19,5 @@ push_swap
 
 # Debug files
 *.dSYM/
+
+tester
