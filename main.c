@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/11 22:36:45 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/15 00:43:02 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,50 +57,74 @@ void	sort_three(t_list **stacka)
 // 	printf("Instructions: %d\n", num);
 // }
 
-void	sort_array(int *arr, int s)
-{
-	int	i;
-	int	x;
-	int	temp_x;
-	int	temp;
+// void	sort_array(int *arr, int s)
+// {
+// 	int	i;
+// 	int	x;
+// 	int	temp_x;
+// 	int	temp;
 
-	x = 0;
-	i = s - 1;
-	while (x < s)
-	{
-		temp_x = x;
-		while (i >= 0)
-		{
-			if (arr[x] > arr[i])
-			{
-				temp = arr[x];
-				arr[x] = arr[i];
-				arr[i] = temp;
-				x++;
-			}
-			i++;
-		}
-		x = temp_x + 1;
-		i = x;
-	}
-}
+// 	x = 0;
+// 	i = s - 1;
+// 	while (x < s)
+// 	{
+// 		temp_x = x;
+// 		while (i >= 0)
+// 		{
+// 			if (arr[x] > arr[i])
+// 			{
+// 				temp = arr[x];
+// 				arr[x] = arr[i];
+// 				arr[i] = temp;
+// 				x++;
+// 			}
+// 			i++;
+// 		}
+// 		x = temp_x + 1;
+// 		i = x;
+// 	}
+// }
 
 void	quick_sort_a(t_list **stacka, t_list **stackb)
 {
 	int	median;
+	int	midval;
 
 	median = (ft_lstsize(*stacka) / 2) + (ft_lstsize(*stacka) % 2);
-	printf("MEDIAN: %d\n", median);
-	if (median == 1 || median == 2)
+	midval = median + ft_lstsize(*stackb);
+	printf("Median: %d\n", median);
+	printf("Midval: %d\n", midval);
+	if (ft_lstsize(*stacka) <= 2)
 		return ;
 	while (ft_lstsize(*stacka) != median)
 	{
-		if ((*stacka)->index < median + ft_lstsize(*stacka))
+		if ((*stacka)->index < midval)
 			push(stacka, stackb, 'b');
 		else
 			rotate(stacka, 'a');
 	}
 	quick_sort_a(stacka, stackb);
+}
+
+void	quick_sort_b(t_list **stackb, t_list **stacka)
+{
+	int	median;
+	int	pivot;
+
+	median = (ft_lstsize(*stackb) / 2) + (ft_lstsize(*stackb) % 2);
+	pivot = median + ft_lstsize(*stacka);
+	printf("Median: %d\n", median);
+	printf("Pivot: %d\n", pivot);
+	if (median == 1)
+		return ;
+	while (ft_lstsize(*stackb) != median)
+	{
+		if ((*stackb)->index < pivot)
+			push(stackb, stacka, 'a');
+		else
+			rotate(stackb, 'b');
+	}
+	// quick_sort_b(stackb, stacka);
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
@@ -112,6 +136,7 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 		sort_three(stacka);
 	if (size >= 4)
 		quick_sort_a(stacka, stackb);
+	// quick_sort_b(stackb, stacka);
 }
 
 int	main(int ac, char **av)
