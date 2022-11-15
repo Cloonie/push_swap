@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/15 00:43:02 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/15 22:30:31 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	quick_sort_a(t_list **stacka, t_list **stackb)
 		else
 			rotate(stacka, 'a');
 	}
-	quick_sort_a(stacka, stackb);
+	// quick_sort_a(stacka, stackb);
 }
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
