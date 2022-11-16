@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/15 22:30:31 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/16 14:19:11 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	quick_sort_a(t_list **stacka, t_list **stackb)
 	printf("Midval: %d\n", midval);
 	if (ft_lstsize(*stacka) <= 2)
 		return ;
-	while (ft_lstsize(*stacka) != median)
+	while (ft_lstsize(*stacka) != median + 1)
 	{
 		if ((*stacka)->index < midval)
 			push(stacka, stackb, 'b');
