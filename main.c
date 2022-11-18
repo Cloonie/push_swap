@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/18 16:50:31 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/18 22:35:39 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,6 @@ void	sort_three(t_list **stacka)
 // 	printf("Instructions: %d\n", num);
 // }
 
-// void	sort_array(int *arr, int s)
-// {
-// 	int	i;
-// 	int	x;
-// 	int	temp_x;
-// 	int	temp;
-
-// 	x = 0;
-// 	i = s - 1;
-// 	while (x < s)
-// 	{
-// 		temp_x = x;
-// 		while (i >= 0)
-// 		{
-// 			if (arr[x] > arr[i])
-// 			{
-// 				temp = arr[x];
-// 				arr[x] = arr[i];
-// 				arr[i] = temp;
-// 				x++;
-// 			}
-// 			i++;
-// 		}
-// 		x = temp_x + 1;
-// 		i = x;
-// 	}
-// }
-
 void	quick_sort_a(t_list **stacka, t_list **stackb)
 {
 	int	median;
@@ -112,25 +84,25 @@ void	quick_sort_a(t_list **stacka, t_list **stackb)
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
-	int	median;
-	int	midval;
-	int	ori_size;
+	int	size;
 
-	ori_size = ft_lstsize(*stackb);
-	median = (ori_size / 2) + (ori_size % 2);
-	midval = median + ft_lstsize(*stacka);
-	if (ft_lstsize(*stackb) <= 2)
-		return ;
-	while (ft_lstsize(*stackb) != median)
+	size = ft_lstsize(*stacka);
+	if (size >= ft_lstsize(*stackb))
 	{
-		if ((*stackb)->index <= midval && (ori_size % 2) == 0)
-			push(stackb, stacka, 'b');
-		else if ((*stackb)->index < midval && (ori_size % 2) == 1)
-			push(stackb, stacka, 'b');
-		else
-			rotate(stackb, 'a');
+		while (ft_lstsize(*stackb))
+		{
+			if ((*stackb)->index == (*stacka)->index - 1)
+				push(stackb, stacka, 'a');
+			else
+				rotate(stackb, 'b');
+		}
+		return ;
 	}
-	// quick_sort_b(stackb, stacka);
+	if ((*stackb)->index == (*stacka)->index - 1)
+		push(stackb, stacka, 'a');
+	else if ((*stackb)->next->index == (*stacka)->index - 1)
+		swap(stackb, 'b');
+	quick_sort_b(stackb, stacka);
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
@@ -141,8 +113,10 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 	if (size == 3)
 		sort_three(stacka);
 	if (size >= 4)
+	{
 		quick_sort_a(stacka, stackb);
-	quick_sort_b(stackb, stacka);
+		quick_sort_b(stackb, stacka);
+	}
 }
 
 int	main(int ac, char **av)
@@ -160,23 +134,24 @@ int	main(int ac, char **av)
 	assign_index(stacka, size);
 	sort_stacks(&stacka, &stackb, size);
 
-	printf("\nStack A:\n");
-	if (stacka == NULL)
-		printf("NULL\n");
-	while (stacka)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stacka->value, stacka->index, stacka->pos);
-		stacka = stacka->next;
-	}
-	printf("\nStack B:\n");
-	if (stackb == NULL)
-		printf("NULL\n");
-	while (stackb)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stackb->value, stackb->index, stackb->pos);
-		stackb = stackb->next;
-	}
+	// printf("\nStack A:\n");
+	// if (stacka == NULL)
+	// 	printf("NULL\n");
+	// while (stacka)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stacka->value, stacka->index, stacka->pos);
+	// 	stacka = stacka->next;
+	// }
+	// printf("\nStack B:\n");
+	// if (stackb == NULL)
+	// 	printf("NULL\n");
+	// while (stackb)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stackb->value, stackb->index, stackb->pos);
+	// 	stackb = stackb->next;
+	// }
+
 	// system("leaks push_swap");
 }
