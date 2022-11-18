@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/16 14:19:11 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/18 15:56:45 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,40 +89,44 @@ void	quick_sort_a(t_list **stacka, t_list **stackb)
 {
 	int	median;
 	int	midval;
+	int	ori_size;
 
-	median = (ft_lstsize(*stacka) / 2) + (ft_lstsize(*stacka) % 2);
+	ori_size = ft_lstsize(*stacka);
+	median = (ori_size / 2) + (ori_size % 2);
 	midval = median + ft_lstsize(*stackb);
-	printf("Median: %d\n", median);
-	printf("Midval: %d\n", midval);
 	if (ft_lstsize(*stacka) <= 2)
 		return ;
-	while (ft_lstsize(*stacka) != median + 1)
+	while (ft_lstsize(*stacka) != median)
 	{
-		if ((*stacka)->index < midval)
+		if ((*stacka)->index <= midval && (ori_size % 2) == 0)
+			push(stacka, stackb, 'b');
+		else if ((*stacka)->index < midval && (ori_size % 2) == 1)
 			push(stacka, stackb, 'b');
 		else
 			rotate(stacka, 'a');
 	}
-	// quick_sort_a(stacka, stackb);
+	quick_sort_a(stacka, stackb);
 }
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
 	int	median;
-	int	pivot;
+	int	midval;
+	int	ori_size;
 
-	median = (ft_lstsize(*stackb) / 2) + (ft_lstsize(*stackb) % 2);
-	pivot = median + ft_lstsize(*stacka);
-	printf("Median: %d\n", median);
-	printf("Pivot: %d\n", pivot);
-	if (median == 1)
+	ori_size = ft_lstsize(*stackb);
+	median = (ori_size / 2) + (ori_size % 2);
+	midval = median + ft_lstsize(*stacka);
+	if (ft_lstsize(*stackb) <= 2)
 		return ;
 	while (ft_lstsize(*stackb) != median)
 	{
-		if ((*stackb)->index < pivot)
-			push(stackb, stacka, 'a');
+		if ((*stackb)->index <= midval && (ori_size % 2) == 0)
+			push(stackb, stacka, 'b');
+		else if ((*stackb)->index < midval && (ori_size % 2) == 1)
+			push(stackb, stacka, 'b');
 		else
-			rotate(stackb, 'b');
+			rotate(stackb, 'a');
 	}
 	// quick_sort_b(stackb, stacka);
 }
@@ -136,7 +140,7 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 		sort_three(stacka);
 	if (size >= 4)
 		quick_sort_a(stacka, stackb);
-	// quick_sort_b(stackb, stacka);
+	quick_sort_b(stackb, stacka);
 }
 
 int	main(int ac, char **av)
