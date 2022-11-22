@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/22 02:58:36 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/22 23:57:49 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,20 @@ void	sort_three(t_list **stacka)
 	}
 }
 
-// void	sort(t_list **stacka, t_list **stackb, int size)
-// {
-// 	int	i = 1;
-// 	int	num = 0;
+int	check_top_half(t_list **stack, int index)
+{
+	t_list	*tmp;
+	int		size;
 
-// 	while (size)
-// 	{
-// 		if ((*stacka)->index == i)
-// 		{
-// 			push(stacka, stackb, 'b');
-// 			size--;
-// 			i++;
-// 		}
-// 		else
-// 			rotate(stacka, 'a');
-// 		num++;
-// 	}
-// 	i -= 1;
-// 	while (i--)
-// 	{
-// 		push(stackb, stacka, 'a');
-// 		num++;
-// 	}
-// 	printf("Instructions: %d\n", num);
-// }
+	tmp = *stack;
+	size = ft_lstsize(tmp);
+	while (tmp->index != index)
+		tmp = tmp->next;
+	if (tmp->pos <= (size / 2))
+		return (1);
+	else
+		return (0);
+}
 
 void	quick_sort_a(t_list **stacka, t_list **stackb)
 {
@@ -86,16 +75,17 @@ void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
 	if (ft_lstsize(*stacka) >= ft_lstsize(*stackb))
 	{
-		while (stackb)
-		{
-			if ((*stackb)->index == (*stacka)->index - 1)
-				push(stackb, stacka, 'a');
-			else if ((*stackb)->next->index == (*stacka)->index - 1)
-				swap(stackb, 'b');
-			else
-				rotate(stackb, 'b');
-		}
-		return ;
+		while (ft_lstsize(*stackb))
+			push(stackb, stacka, 'a');
+	}
+	while (ft_lstsize(*stackb))
+	{
+		if ((*stackb)->index == (*stacka)->index - 1)
+			push(stackb, stacka, 'a');
+		else if (check_top_half(stackb, (*stacka)->index - 1))
+			rotate(stackb, 'b');
+		else
+			reverse_rotate(stackb, 'b');
 	}
 	// if ((*stackb)->index == (*stacka)->index - 1)
 	// 	push(stackb, stacka, 'a');
@@ -133,24 +123,24 @@ int	main(int ac, char **av)
 	assign_index(stacka, size);
 	sort_stacks(&stacka, &stackb, size);
 
-	printf("\nStack A:\n");
-	if (stacka == NULL)
-		printf("NULL\n");
-	while (stacka)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stacka->value, stacka->index, stacka->pos);
-		stacka = stacka->next;
-	}
-	printf("\nStack B:\n");
-	if (stackb == NULL)
-		printf("NULL\n");
-	while (stackb)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stackb->value, stackb->index, stackb->pos);
-		stackb = stackb->next;
-	}
+	// printf("\nStack A:\n");
+	// if (stacka == NULL)
+	// 	printf("NULL\n");
+	// while (stacka)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stacka->value, stacka->index, stacka->pos);
+	// 	stacka = stacka->next;
+	// }
+	// printf("\nStack B:\n");
+	// if (stackb == NULL)
+	// 	printf("NULL\n");
+	// while (stackb)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stackb->value, stackb->index, stackb->pos);
+	// 	stackb = stackb->next;
+	// }
 
 	// system("leaks push_swap");
 }

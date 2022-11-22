@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/08 00:59:23 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/22 16:29:42 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	push(t_list **from, t_list **pushto, int c);
 void	ss(t_list **stacka, t_list **stackb, int c);
 void	rr(t_list **stacka, t_list **stackb, int c);
 void	rrr(t_list **stacka, t_list **stackb, int c);
+
+void	quick_sort_a(t_list **stacka, t_list **stackb);
+void	quick_sort_b(t_list **stackb, t_list **stacka);
 
 #endif
