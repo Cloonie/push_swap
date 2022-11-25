@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/22 23:57:49 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/24 16:20:00 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	quick_sort_b(t_list **stackb, t_list **stacka)
 	{
 		if ((*stackb)->index == (*stacka)->index - 1)
 			push(stackb, stacka, 'a');
+		else if ((*stackb)->next->index == (*stacka)->index - 1)
+			swap(stackb, 'b');
 		else if (check_top_half(stackb, (*stacka)->index - 1))
 			rotate(stackb, 'b');
 		else
