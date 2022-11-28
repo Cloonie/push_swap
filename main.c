@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/25 17:01:33 by mliew            ###   ########.fr       */
+/*   Updated: 2022/11/28 21:19:20 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	is_sorted(t_list **stacka)
 		if (tmp->index == tmp->pos)
 			tmp = tmp->next;
 		else
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	check_top_half(t_list **stack, int index)
@@ -69,25 +69,26 @@ void	quick_sort_a(t_list **stacka, t_list **stackb, int size)
 	median = (size / 2) + (size % 2);
 	midval = median + ft_lstsize(*stackb);
 	if (ft_lstsize(*stacka) <= 2)
+	{
+		if ((*stacka)->index > (*stacka)->next->index)
+			swap(stacka, 'a');
 		return ;
+	}
 	while (ft_lstsize(*stacka) != median)
 	{
 		if (((*stacka)->index <= midval && (size % 2) == 0)
 			|| ((*stacka)->index < midval && (size % 2) == 1))
 			push(stacka, stackb, 'b');
-		// else if (check_top_half(stacka, ft_lstsize(*stackb) + 1))
-		// 	rotate(stacka, 'a');
-		else
+		else if (check_top_half(stacka, ft_lstsize(*stackb) + 1))
 			rotate(stacka, 'a');
+		else
+			reverse_rotate(stacka, 'a');
 	}
 	quick_sort_a(stacka, stackb, ft_lstsize(*stacka));
-	if ((*stacka)->index > (*stacka)->next->index)
-		swap(stacka, 'a');
 }
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
-	
 	while (ft_lstsize(*stackb))
 	{
 		if ((*stackb)->index == (*stacka)->index - 1)
@@ -98,13 +99,13 @@ void	quick_sort_b(t_list **stackb, t_list **stacka)
 			rotate(stackb, 'b');
 		else
 			reverse_rotate(stackb, 'b');
-		if (ft_lstsize(*stacka) >= ft_lstsize(*stackb))
-		{
-			while (ft_lstsize(*stackb))
-				push(stackb, stacka, 'a');
-			return ;
-		}
 	}
+	// if (ft_lstsize(*stacka) >= ft_lstsize(*stackb))
+	// {
+	// 	while (ft_lstsize(*stackb))
+	// 		push(stackb, stacka, 'a');
+	// 	return ;
+	// }
 	// if ((*stackb)->index == (*stacka)->index - 1)
 	// 	push(stackb, stacka, 'a');
 	// else if ((*stackb)->next->index == (*stacka)->index - 1)
@@ -117,6 +118,8 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 	int	stack_size;
 
 	stack_size = ft_lstsize(*stacka);
+	if (is_sorted(stacka))
+		return ;
 	if (size == 2)
 		if ((*stacka)->index != 1)
 			swap(stacka, 'a');
@@ -124,13 +127,8 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 		sort_three(stacka);
 	if (size >= 4)
 	{
-		// while (is_sorted(stacka))
-		// {
-			quick_sort_a(stacka, stackb, stack_size);
-			quick_sort_b(stackb, stacka);
-			stack_size /= 2;
-			quick_sort_a(stacka, stackb, stack_size);
-		// }
+		quick_sort_a(stacka, stackb, stack_size);
+		quick_sort_b(stackb, stacka);
 	}
 }
 
