@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/29 14:22:22 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/01 13:41:55 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,6 @@ int	main(int ac, char **av)
 	stackb = NULL;
 	if (ac == 1)
 		return (0);
-	if (ac == 2)
-		errormsg();
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
 	size = stacka->size;

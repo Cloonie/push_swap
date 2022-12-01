@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
+#    By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/11/28 20:24:12 by mliew            ###   ########.fr        #
+#    Updated: 2022/12/01 13:43:38 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIB42)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(SANITIZE)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME) #$(SANITIZE)
 
 clean:
 	make clean -C $(LIB42)

@@ -25,9 +25,8 @@ int	check_num(char *arg)
 
 	nbr = ft_atoi(arg);
 	if (nbr > INT_MAX || nbr < INT_MIN)
-		return (0);
-	else
 		return (1);
+	return (0);
 }
 
 int	check_arg(char *arg)
@@ -35,7 +34,7 @@ int	check_arg(char *arg)
 	int	i;
 
 	i = 0;
-	if (!arg)
+	if (!arg[i])
 		return (0);
 	if (arg[i] == '-' || arg[i] == '+')
 	{
@@ -69,7 +68,7 @@ t_list	*fill_stack(int ac, char **av)
 		array = ft_split(av[1], ' ');
 		while (array[i] != NULL)
 		{
-			if (check_arg(array[i]) != 1)
+			if (!check_arg(array[i]))
 				errormsg();
 			tmp = ft_lstnew(array[i++]);
 			tmp->pos = i;
@@ -80,7 +79,7 @@ t_list	*fill_stack(int ac, char **av)
 	}
 	while (++i < ac)
 	{
-		if (check_arg(av[i]) != 1)
+		if (!check_arg(av[i]))
 			errormsg();
 		tmp = ft_lstnew(av[i]);
 		tmp->pos = i;
