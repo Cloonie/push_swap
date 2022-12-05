@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/01 13:41:55 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/05 22:44:09 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,34 @@ void	quick_sort_a(t_list **stacka, t_list **stackb, int size)
 		// else if (check_top_half(stacka, ft_lstsize(*stackb) + 1))
 		// 	rotate(stacka, 'a');
 		else
-			reverse_rotate(stacka, 'a');
+			rotate(stacka, 'a');
 	}
 	quick_sort_a(stacka, stackb, ft_lstsize(*stacka));
 }
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
+	int	current_size;
+
 	while (ft_lstsize(*stackb))
 	{
+		// if (ft_lstsize(*stacka) >= ft_lstsize(*stackb))
+		// {
+		// 	current_size = ft_lstsize(*stackb);
+		// 	while (ft_lstsize(*stackb))
+		// 		push(stackb, stacka, 'a');
+		// 	quick_sort_a(stacka, stackb, current_size);
+		// 	return ;
+		// }
 		if ((*stackb)->index == (*stacka)->index - 1)
 			push(stackb, stacka, 'a');
-		else if ((*stackb)->next->index == (*stacka)->index - 1)
-			swap(stackb, 'b');
+		// else if ((*stackb)->next->index == (*stacka)->index - 1)
+		// 	swap(stackb, 'b');
 		else if (check_top_half(stackb, (*stacka)->index - 1))
 			rotate(stackb, 'b');
 		else
 			reverse_rotate(stackb, 'b');
 	}
-	// if (ft_lstsize(*stacka) >= ft_lstsize(*stackb))
-	// {
-	// 	while (ft_lstsize(*stackb))
-	// 		push(stackb, stacka, 'a');
-	// 	return ;
-	// }
 	// if ((*stackb)->index == (*stacka)->index - 1)
 	// 	push(stackb, stacka, 'a');
 	// else if ((*stackb)->next->index == (*stacka)->index - 1)

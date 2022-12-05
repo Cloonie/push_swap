@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/10/19 18:25:25 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/05 20:47:43 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_list
 }					t_list;
 
 // MANDATORY
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);

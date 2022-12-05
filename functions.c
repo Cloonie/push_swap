@@ -24,9 +24,10 @@ int	check_num(char *arg)
 	long long int	nbr;
 
 	nbr = ft_atoi(arg);
-	if (nbr > INT_MAX || nbr < INT_MIN)
+	if (nbr < INT_MIN || nbr > INT_MAX)
+		return (0);
+	else
 		return (1);
-	return (0);
 }
 
 int	check_arg(char *arg)
@@ -34,14 +35,14 @@ int	check_arg(char *arg)
 	int	i;
 
 	i = 0;
-	if (!arg[i])
-		return (0);
 	if (arg[i] == '-' || arg[i] == '+')
 	{
 		if (arg[i + 1] == '\0')
 			return (0);
 		i++;
 	}
+	if (!arg[i])
+		return (0);
 	if (arg[i] == '0' && arg[i + 1] != '\0')
 		return (0);
 	while (arg[i])
