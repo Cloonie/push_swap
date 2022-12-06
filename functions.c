@@ -21,7 +21,7 @@ void	errormsg(void)
 
 int	check_num(char *arg)
 {
-	long long int	nbr;
+	long	nbr;
 
 	nbr = ft_atoi(arg);
 	if (nbr < INT_MIN || nbr > INT_MAX)
@@ -67,6 +67,8 @@ t_list	*fill_stack(int ac, char **av)
 	if (ac == 2)
 	{
 		array = ft_split(av[1], ' ');
+		if (!array[i])
+			exit(1);
 		while (array[i] != NULL)
 		{
 			if (!check_arg(array[i]))
