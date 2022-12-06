@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 00:01:06 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/07 00:29:16 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,7 @@ void	quick_sort_a(t_list **stacka, t_list **stackb, int size)
 
 void	quick_sort_b(t_list **stackb, t_list **stacka)
 {
-	int	chunk;
-
-	chunk = ft_lstsize(*stackb) / 2;
-	while (chunk < ft_lstsize(*stackb))
+	while (ft_lstsize(*stackb))
 	{
 		if ((*stackb)->index == (*stacka)->index - 1)
 			push(stackb, stacka, 'a');
@@ -103,31 +100,8 @@ void	quick_sort_b(t_list **stackb, t_list **stacka)
 		else
 			reverse_rotate(stackb, 'b');
 	}
-	while (ft_lstsize(*stackb))
-		push(stackb, stacka, 'a');
-	// quick_sort_a(stacka, stackb, chunk);
-	// if ((*stackb)->index == (*stacka)->index - 1)
+	// while (ft_lstsize(*stackb))
 	// 	push(stackb, stacka, 'a');
-	// else if ((*stackb)->next->index == (*stacka)->index - 1)
-	// 	swap(stackb, 'b');
-	// quick_sort_b(stackb, stacka);
-}
-
-void	sort3(t_list **stacka, t_list **stackb, int size)
-{
-	// int	i;
-	int	median;
-
-	// i = 0;
-	median = size / 2;
-	// while (i < median)
-	// {
-		if ((*stacka)->index <= median)
-			push(stacka, stackb, 'b');
-		else
-			rotate(stacka, 'a');
-	// 	i++;
-	// }
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
@@ -142,14 +116,10 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 			swap(stacka, 'a');
 	if (size == 3)
 		sort_three(stacka);
-	if (size >= 4)
+	if (size < 500)
 	{
-		// while (!is_sorted(stacka) && !ft_lstsize(*stackb))
-		// {
-			quick_sort_a(stacka, stackb, stack_size);
-			quick_sort_b(stackb, stacka);
-			// sort3(stackb, stacka, stack_size);
-		// }
+		quick_sort_a(stacka, stackb, stack_size);
+		quick_sort_b(stackb, stacka);
 	}
 }
 
