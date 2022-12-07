@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 19:23:04 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/07 22:12:13 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ void	quick_sort_b(t_list **stackb, t_list **stacka, int size)
 	// 	push(stackb, stacka, 'a');
 }
 
+void	sort_a(t_list **stacka, t_list **stackb, int size)
+{
+	int	pivot;
+	int	chunk_size;
+
+	pivot = size / 2;
+	printf("pivot: %d\n", pivot);
+
+	while (pivot)
+	{
+		if ((*stacka)->index <= pivot)
+			push(stacka, stackb, 'b');
+		else
+			
+	}
+	(void)stacka;
+	(void)stackb;
+}
+
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
 	(void)stackb;
@@ -87,8 +106,10 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 		sort_five(stacka, stackb);
 	else
 	{
-		quick_sort_a(stacka, stackb, size);
-		quick_sort_b(stackb, stacka, size);
+		// quick_sort_a(stacka, stackb, size);
+		// quick_sort_b(stackb, stacka, size);
+		sort_a(stackb, stacka, size);
+		// sort_b(stackb, stacka, size);
 	}
 }
 
@@ -107,24 +128,24 @@ int	main(int ac, char **av)
 	assign_index(stacka, size);
 	sort_stacks(&stacka, &stackb, size);
 
-	// printf("\nStack A:\n");
-	// if (stacka == NULL)
-	// 	printf("NULL\n");
-	// while (stacka)
-	// {
-	// 	printf("Value: %d, Index: %d, Pos: %d\n",
-	// 		stacka->value, stacka->index, stacka->pos);
-	// 	stacka = stacka->next;
-	// }
-	// printf("\nStack B:\n");
-	// if (stackb == NULL)
-	// 	printf("NULL\n");
-	// while (stackb)
-	// {
-	// 	printf("Value: %d, Index: %d, Pos: %d\n",
-	// 		stackb->value, stackb->index, stackb->pos);
-	// 	stackb = stackb->next;
-	// }
+	printf("\nStack A:\n");
+	if (stacka == NULL)
+		printf("NULL\n");
+	while (stacka)
+	{
+		printf("Value: %d, Index: %d, Pos: %d\n",
+			stacka->value, stacka->index, stacka->pos);
+		stacka = stacka->next;
+	}
+	printf("\nStack B:\n");
+	if (stackb == NULL)
+		printf("NULL\n");
+	while (stackb)
+	{
+		printf("Value: %d, Index: %d, Pos: %d\n",
+			stackb->value, stackb->index, stackb->pos);
+		stackb = stackb->next;
+	}
 
 	// system("leaks push_swap");
 }
