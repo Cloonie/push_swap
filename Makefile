@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+         #
+#    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/12/01 13:43:38 by mliew            ###   ########.fr        #
+#    Updated: 2022/12/07 19:14:34 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	push_swap
 RM		=	rm -rf
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-SRCS	=	main.c operators.c functions.c
+SRCS	=	main.c operators.c functions.c check.c sort.c
 OBJS	=	$(SRCS:.c=.o)
 LIB42	=	lib42
 LDFLAGS	=	-Llib42

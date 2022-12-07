@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 00:29:16 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/07 19:23:04 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	sort_three(t_list **stacka)
-{
-	int	i;
-
-	i = 0;
-	while (i <= 3)
-	{
-		if ((*stacka)->index == 3)
-			rotate(stacka, 'a');
-		if ((*stacka)->index == 2 && (*stacka)->next->index == 3)
-			reverse_rotate(stacka, 'a');
-		if ((*stacka)->index == 2)
-			swap(stacka, 'a');
-		if ((*stacka)->index == 1 && (*stacka)->next->index == 3)
-			swap(stacka, 'a');
-		i++;
-	}
-}
-
-int	is_sorted(t_list **stacka)
-{
-	t_list	*tmp;
-
-	tmp = *stacka;
-	while (tmp)
-	{
-		if (tmp->index == tmp->pos)
-			tmp = tmp->next;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 int	check_top_half(t_list **stack, int index)
 {
@@ -87,8 +53,9 @@ void	quick_sort_a(t_list **stacka, t_list **stackb, int size)
 	quick_sort_a(stacka, stackb, ft_lstsize(*stacka));
 }
 
-void	quick_sort_b(t_list **stackb, t_list **stacka)
+void	quick_sort_b(t_list **stackb, t_list **stacka, int size)
 {
+	(void)size;
 	while (ft_lstsize(*stackb))
 	{
 		if ((*stackb)->index == (*stacka)->index - 1)
@@ -106,20 +73,22 @@ void	quick_sort_b(t_list **stackb, t_list **stacka)
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
-	int	stack_size;
-
-	stack_size = ft_lstsize(*stacka);
+	(void)stackb;
 	if (is_sorted(stacka))
 		return ;
-	if (size == 2)
-		if ((*stacka)->index != 1)
-			swap(stacka, 'a');
-	if (size == 3)
-		sort_three(stacka);
-	if (size < 500)
+	else if (size == 2)
 	{
-		quick_sort_a(stacka, stackb, stack_size);
-		quick_sort_b(stackb, stacka);
+		if ((*stacka)->index > (*stacka)->next->index)
+			swap(stacka, 'a');
+	}
+	else if (size == 3)
+		sort_three(stacka);
+	else if (size == 5)
+		sort_five(stacka, stackb);
+	else
+	{
+		quick_sort_a(stacka, stackb, size);
+		quick_sort_b(stackb, stacka, size);
 	}
 }
 
@@ -131,31 +100,31 @@ int	main(int ac, char **av)
 
 	stackb = NULL;
 	if (ac == 1)
-		return (0);
+		exit (0);
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
-	size = stacka->size;
+	size = ft_lstsize(stacka);
 	assign_index(stacka, size);
 	sort_stacks(&stacka, &stackb, size);
 
-	printf("\nStack A:\n");
-	if (stacka == NULL)
-		printf("NULL\n");
-	while (stacka)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stacka->value, stacka->index, stacka->pos);
-		stacka = stacka->next;
-	}
-	printf("\nStack B:\n");
-	if (stackb == NULL)
-		printf("NULL\n");
-	while (stackb)
-	{
-		printf("Value: %d, Index: %d, Pos: %d\n",
-			stackb->value, stackb->index, stackb->pos);
-		stackb = stackb->next;
-	}
+	// printf("\nStack A:\n");
+	// if (stacka == NULL)
+	// 	printf("NULL\n");
+	// while (stacka)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stacka->value, stacka->index, stacka->pos);
+	// 	stacka = stacka->next;
+	// }
+	// printf("\nStack B:\n");
+	// if (stackb == NULL)
+	// 	printf("NULL\n");
+	// while (stackb)
+	// {
+	// 	printf("Value: %d, Index: %d, Pos: %d\n",
+	// 		stackb->value, stackb->index, stackb->pos);
+	// 	stackb = stackb->next;
+	// }
 
 	// system("leaks push_swap");
 }

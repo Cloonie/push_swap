@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/11/25 15:59:55 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/07 19:16:12 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 # include "lib42/includes/get_next_line_bonus.h"
 
 // functions.c
+t_list	*fill_stack(int ac, char **av);
+t_list	*assign_index(t_list *stack, int index);
+void	set_position(t_list *stack);
+
+// check.c
 void	errormsg(void);
 int		check_num(char *arg);
 int		check_arg(char *arg);
-t_list	*fill_stack(int ac, char **av);
 void	check_dup(t_list *stack);
-t_list	*assign_index(t_list *stack, int index);
-void	set_position(t_list *stack);
 
 // operators.c
 void	swap(t_list **stacka, int c);
@@ -35,7 +37,11 @@ void	ss(t_list **stacka, t_list **stackb, int c);
 void	rr(t_list **stacka, t_list **stackb, int c);
 void	rrr(t_list **stacka, t_list **stackb, int c);
 
+// sort.c
+int		is_sorted(t_list **stack);
+void	sort_three(t_list **stacka);
+void	sort_five(t_list **stacka, t_list **stackb);
 void	quick_sort_a(t_list **stacka, t_list **stackb, int size);
-void	quick_sort_b(t_list **stackb, t_list **stacka);
+void	quick_sort_b(t_list **stackb, t_list **stacka, int size);
 
 #endif

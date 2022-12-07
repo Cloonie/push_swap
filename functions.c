@@ -12,55 +12,33 @@
 
 #include "push_swap.h"
 
-void	errormsg(void)
+t_list	*bracket_arg(char **av)
 {
-	write(2, "Error\n", 6);
-	// system("leaks push_swap");
-	exit (0);
-}
-
-int	check_num(char *arg)
-{
-	long	nbr;
-
-	nbr = ft_atoi(arg);
-	if (nbr < INT_MIN || nbr > INT_MAX)
-		return (0);
-	else
-		return (1);
-}
-
-int	check_arg(char *arg)
-{
-	int	i;
+	t_list	*head;
+	t_list	*tmp;
+	char	**array;
+	int		i;
 
 	i = 0;
-	if (arg[i] == '-' || arg[i] == '+')
+	array = ft_split(av[1], ' ');
+	if (!array[i])
+		exit (0);
+	while (array[i] != NULL)
 	{
-		if (arg[i + 1] == '\0')
-			return (0);
-		i++;
+		if (!check_arg(array[i]))
+			errormsg();
+		tmp = ft_lstnew(array[i++]);
+		ft_lstadd_back(&head, tmp);
 	}
-	if (!arg[i])
-		return (0);
-	if (arg[i] == '0' && arg[i + 1] != '\0')
-		return (0);
-	while (arg[i])
-	{
-		if (arg[i] >= '0' && arg[i] <= '9')
-			i++;
-		else
-			return (0);
-	}
-	return (check_num(arg));
+	return (head);
 }
 
 t_list	*fill_stack(int ac, char **av)
 {
-	int		i;
 	t_list	*head;
 	t_list	*tmp;
 	char	**array;
+	int		i;
 
 	i = 0;
 	head = NULL;
@@ -68,16 +46,14 @@ t_list	*fill_stack(int ac, char **av)
 	{
 		array = ft_split(av[1], ' ');
 		if (!array[i])
-			exit(1);
+			exit (0);
 		while (array[i] != NULL)
 		{
 			if (!check_arg(array[i]))
 				errormsg();
 			tmp = ft_lstnew(array[i++]);
-			tmp->pos = i;
 			ft_lstadd_back(&head, tmp);
 		}
-		head->size = i;
 		return (head);
 	}
 	while (++i < ac)
@@ -85,27 +61,9 @@ t_list	*fill_stack(int ac, char **av)
 		if (!check_arg(av[i]))
 			errormsg();
 		tmp = ft_lstnew(av[i]);
-		tmp->pos = i;
 		ft_lstadd_back(&head, tmp);
 	}
-	head->size = i - 1;
 	return (head);
-}
-
-void	check_dup(t_list *stack)
-{
-	t_list	*tmp;
-
-	tmp = stack;
-	if (stack == NULL)
-		return ;
-	while (tmp->next != NULL)
-	{
-		if (stack->value == tmp->next->value)
-			errormsg();
-		tmp = tmp->next;
-	}
-	check_dup(stack->next);
 }
 
 t_list	*assign_index(t_list *stack, int index)
