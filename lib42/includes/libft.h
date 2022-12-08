@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/05 20:47:43 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/08 17:45:35 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ typedef struct s_list
 	int				size;
 	int				index;
 	int				pos;
-	int				target_pos;
-	int				cost_a;
-	int				cost_b;
 	struct s_list	*next;
 }					t_list;
 

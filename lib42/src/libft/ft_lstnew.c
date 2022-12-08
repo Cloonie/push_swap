@@ -23,9 +23,6 @@ t_list	*ft_lstnew(void *content)
 	lst->size = 0;
 	lst->index = 0;
 	lst->pos = 0;
-	lst->target_pos = 0;
-	lst->cost_a = 0;
-	lst->cost_b = 0;
 	lst->next = NULL;
 	return (lst);
 }
