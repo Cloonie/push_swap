@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 21:59:00 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/08 19:03:50 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	swap(t_list **head, int c)
 	next = (*head)->next;
 	(*head)->next = tmp;
 	tmp->next = next;
-	set_position (*head);
 	if (c == 'a')
 		ft_printf("sa\n");
 	else if (c == 'b')
@@ -41,7 +40,6 @@ void	rotate(t_list **head, int c)
 	tail = ft_lstlast(*head);
 	tail->next = tmp;
 	tmp->next = NULL;
-	set_position (*head);
 	if (c == 'a')
 		ft_printf("ra\n");
 	else if (c == 'b')
@@ -60,7 +58,6 @@ void	reverse_rotate(t_list **head, int c)
 	tmp->next = NULL;
 	tail->next = *head;
 	*head = tail;
-	set_position (*head);
 	if (c == 'a')
 		ft_printf("rra\n");
 	else if (c == 'b')
@@ -75,8 +72,6 @@ void	push(t_list **from, t_list **pushto, int c)
 	*from = (*from)->next;
 	tmp->next = *pushto;
 	*pushto = tmp;
-	set_position (*pushto);
-	set_position (*from);
 	if (c == 'a')
 		ft_printf("pa\n");
 	else if (c == 'b')
