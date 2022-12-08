@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 22:12:13 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/08 16:41:41 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	quick_sort_a(t_list **stacka, t_list **stackb, int size)
 
 void	quick_sort_b(t_list **stackb, t_list **stacka, int size)
 {
-	(void)size;
-	while (ft_lstsize(*stackb))
+	c_list	*chunk;
+
+	while (ft_lstsize(*stackb) > (size / 2))
 	{
 		if ((*stackb)->index == (*stacka)->index - 1)
 			push(stackb, stacka, 'a');
@@ -67,28 +68,38 @@ void	quick_sort_b(t_list **stackb, t_list **stacka, int size)
 		else
 			reverse_rotate(stackb, 'b');
 	}
-	// while (ft_lstsize(*stackb))
-	// 	push(stackb, stacka, 'a');
+	chunk->size = ft_lstsize(*stackb);
+	while (ft_lstsize(*stackb))
+		push(stackb, stacka, 'a');
 }
 
 void	sort_a(t_list **stacka, t_list **stackb, int size)
 {
 	int	pivot;
-	int	chunk_size;
+	// int	count;
+	// int	chunk_size;
 
 	pivot = size / 2;
-	printf("pivot: %d\n", pivot);
-
 	while (pivot)
 	{
 		if ((*stacka)->index <= pivot)
 			push(stacka, stackb, 'b');
 		else
-			
+			rotate(stacka, 'a');
 	}
 	(void)stacka;
 	(void)stackb;
 }
+
+// void quicksortStackA(t_list **a, int low, int high)
+// {
+// 	if (low < high)
+// 	{
+// 		int pivot = partitionStackA(a, low, high);
+// 		quicksortStackA(a, low, pivot-1);
+// 		quicksortStackA(a, pivot+1, high);
+// 	}
+// }
 
 void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 {
@@ -106,9 +117,9 @@ void	sort_stacks(t_list **stacka, t_list **stackb, int size)
 		sort_five(stacka, stackb);
 	else
 	{
-		// quick_sort_a(stacka, stackb, size);
-		// quick_sort_b(stackb, stacka, size);
-		sort_a(stackb, stacka, size);
+		quick_sort_a(stacka, stackb, size);
+		quick_sort_b(stackb, stacka, size);
+		// sort_a(stackb, stacka, size);
 		// sort_b(stackb, stacka, size);
 	}
 }
