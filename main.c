@@ -3,72 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/08 21:20:28 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/09 21:58:57 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_a(t_list **stacka, t_list **stackb, int size)
+int	count_chunk(t_list **stack)
 {
-	int	pivot;
-	int i;
+	int		count;
+	t_list	*tmp;
 
-	i = 0;
-	pivot = size - (size / 2);
-	while (++i <= size)
+	count = 0;
+	tmp = *stack;
+	while (tmp)
 	{
-		if ((*stacka)->index <= pivot)
+		if (tmp->size == tmp->next->size)
 		{
-			push(stacka, stackb, 'b');
-			(*stackb)->high = pivot;
-			(*stackb)->low = pivot;
+			tmp = tmp->next;
+			count++;
 		}
 		else
-			rotate(stacka, 'a');
+			return (0);
 	}
-	// i = pivot;
-	// pivot = pivot + (pivot / 2) + (pivot % 2);
-	// while (i--)
-	// {
-	// 	if ((*stacka)->index <= pivot && (*stacka)->size == size)
-	// 	{
-	// 		push(stacka, stackb, 'b');
-	// 		(*stackb)->size = pivot;
-	// 		i++;
-	// 	}
-	// 	else
-	// 		reverse_rotate(stacka, 'a');
-	// }
-	// if ((*stacka)->size == ft_lstlast(*stacka)->size)
-	// 	rotate(stacka, 'a');
-	// if ((*stacka)->index > (*stacka)->next->index
-	// 	&& (*stacka)->size == (*stacka)->next->size)
-	// 	swap(stacka, 'a');
-	// if (ft_lstsize(*stackb) == 2 && (*stackb)->index < (*stackb)->next->index)
-	// 	swap(stackb, 'b');
-	// quick_sort_b(stackb, stacka, (*stacka)->size);
+	return (count);
+}
+
+void	assign_chunk(t_list **stacka, int highest)
+{
+	t_list			*tmp;
+	static int		lowest;
+
+	tmp = *stacka;
+	if (!lowest)
+		lowest = INT_MAX;
+	while (tmp)
+	{
+		if (tmp->index <= highest && tmp->index < lowest)
+			lowest = tmp->index;
+		tmp = tmp->next;
+	}
+	(*stacka)->low = lowest;
+	(*stacka)->high = highest;
+	(*stacka)->size = (highest - lowest) + 1;
+}
+
+void	sort_a(t_list **stacka, t_list **stackb, int size)
+{
+	int	median;
+	int	i;
+
+	i = size;
+	median = ft_lstsize(*stackb) + (size / 2) + (size % 2);
+	if (size == 2)
+		sort_two(stacka);
+	else if (size == 3)
+		sort_three(stacka);
+	else if (size > 3)
+	{
+		while (i--)
+		{
+			if ((*stacka)->index <= median)
+			{
+				// assign_chunk(stacka, median);
+				(*stacka)->size = (size / 2) + (size % 2);
+				push(stacka, stackb, 'b');
+			}
+			else
+				rotate(stacka, 'a');
+		}
+		sort_a(stacka, stackb, (size / 2));
+		sort_b(stackb, stacka, (size / 2) + (size % 2));
+	}
 }
 
 void	sort_b(t_list **stackb, t_list **stacka, int size)
 {
-	int	pivot;
+	int	whole_stack;
+	int	median;
+	int	i;
 
-	pivot = (size / 2) + (size % 2);
-	pivot = pivot + (pivot / 2) + (pivot % 2);
-	while (pivot--)
+	whole_stack = ft_lstsize(*stacka) + ft_lstsize(*stackb);
+	median = (whole_stack + 1 - size - ((size / 2) + (size % 2)));
+	i = 0;
+	if (size == 2)
+		sort_two(stacka);
+	else if (size == 3)
+		sort_three(stacka);
+	else if (size > 3)
 	{
-		if ((*stacka)->index <= pivot && (*stacka)->size == size)
+		while (i++ < size)
 		{
-			push(stacka, stackb, 'b');
-			(*stackb)->size = pivot;
-			pivot++;
+			if ((*stackb)->index > median)
+				push(stackb, stacka, 'a');
+			else
+				rotate(stackb, 'b');
 		}
-		else
-			reverse_rotate(stacka, 'a');
+		sort_a(stacka, stackb, (size / 2));
+		sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
 }
 
@@ -80,10 +115,7 @@ void	sort_stacks(t_list **stacka, t_list **stackb)
 	if (is_sorted(stacka))
 		return ;
 	else if (size == 2)
-	{
-		if ((*stacka)->index > (*stacka)->next->index)
-			swap(stacka, 'a');
-	}
+		sort_two(stacka);
 	else if (size == 3)
 		sort_three(stacka);
 	else if (size == 5)
@@ -93,7 +125,6 @@ void	sort_stacks(t_list **stacka, t_list **stackb)
 		// quick_sort_a(stacka, stackb, size);
 		// quick_sort_b(stackb, stacka, size);
 		sort_a(stacka, stackb, size);
-		// sort_b(stackb, stacka, size);
 	}
 }
 
@@ -110,7 +141,6 @@ int	main(int ac, char **av)
 	assign_index(stacka);
 	set_size(stacka);
 	sort_stacks(&stacka, &stackb);
-
 	printf("\nStack A:\n");
 	if (stacka == NULL)
 		printf("NULL\n");

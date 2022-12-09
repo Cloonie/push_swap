@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/08 20:53:51 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/09 16:37:56 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	rrr(t_list **stacka, t_list **stackb, int c);
 
 // sort.c
 int		is_sorted(t_list **stack);
+void	sort_two(t_list **stacka);
 void	sort_three(t_list **stacka);
 void	sort_five(t_list **stacka, t_list **stackb);
 void	quick_sort_a(t_list **stacka, t_list **stackb, int size);

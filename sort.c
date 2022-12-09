@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:58:34 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 19:08:45 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/09 16:37:32 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	is_sorted(t_list **stack)
 		current = (current)->next;
 	}
 	return (1);
+}
+
+void	sort_two(t_list **stacka)
+{
+	if ((*stacka)->index > (*stacka)->next->index)
+		swap(stacka, 'a');
 }
 
 void	sort_three(t_list **stacka)
