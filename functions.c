@@ -96,14 +96,14 @@ t_list	*assign_index(t_list *stack)
 	return (head);
 }
 
-void	set_size(t_list *stack)
+void	set_size(t_list *stack, int size)
 {
-	int size;
-	
-	size = ft_lstsize(stack);
-	while (stack)
+	t_list	*tmp;
+
+	tmp = stack;
+	while (tmp)
 	{
-		stack->size = size;
-		stack = stack->next;
+		tmp->size = size;
+		tmp = tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/09 16:37:56 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/12 16:28:15 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // functions.c
 t_list	*fill_stack(int ac, char **av);
 t_list	*assign_index(t_list *stack);
-void	set_size(t_list *stack);
+void	set_size(t_list *stack, int size);
 
 // check.c
 void	errormsg(void);
@@ -47,4 +47,5 @@ void	quick_sort_b(t_list **stackb, t_list **stacka, int size);
 void	sort_a(t_list **stacka, t_list **stackb, int size);
 void	sort_b(t_list **stackb, t_list **stacka, int size);
 
+void	printing(t_list *stacka, t_list *stackb);
 #endif
