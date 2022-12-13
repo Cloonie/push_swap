@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/12 16:28:15 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:12:23 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ void	sort_three(t_list **stacka);
 void	sort_five(t_list **stacka, t_list **stackb);
 void	quick_sort_a(t_list **stacka, t_list **stackb, int size);
 void	quick_sort_b(t_list **stackb, t_list **stacka, int size);
+
 void	sort_a(t_list **stacka, t_list **stackb, int size);
 void	sort_b(t_list **stackb, t_list **stacka, int size);
+void	spliting(t_list **src, t_list **dst, int size, int c);
+void	re_adjust(t_list **src, int c);
 
 void	printing(t_list *stacka, t_list *stackb);
 #endif

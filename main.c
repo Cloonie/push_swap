@@ -6,85 +6,85 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/12 16:53:22 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/13 23:12:20 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	spliting(t_list **stacka, t_list **stackb, int size)
+void	spliting(t_list **src, t_list **dst, int size, int c)
 {
-	static int	median;
-	int	i;
+	int	median;
+	int	total_stacks;
+	int	adjust;
+	static int recursive;
 
-	i = size;
-	median = median + (size / 2) + (size % 2);
+	recursive++;
+	total_stacks = ft_lstsize(*src) + ft_lstsize(*dst);
+	median = total_stacks - (size / 2);
+	adjust = 0;
 
-	printf("\nA: |size: %d| ", size);
-	printf("|median: %d| \n", median);
+	printf("\n|Size: %d| ", size);
+	printf("|Median: %d| ", median);
+	printf("|Recursion No: %d| \n", recursive);
+	// printing(*src, *dst);
 
-	while (i--)
+	while (size--)
 	{
-		if ((*stacka)->index <= median)
+		if ((*src)->index <= median
+			&& ((*src)->size == median || (*src)->size == total_stacks))
 		{
-			(*stacka)->size = median;
-			push(stacka, stackb, 'b');
+			(*src)->size = median;
+			if (c == 'a')
+				push(src, dst, 'b');
+			else if (c == 'b')
+				push(src, dst, 'a');
 		}
 		else
 		{
-			rotate(stacka, 'a');
+			rotate(src, c);
+			adjust++;
 		}
 	}
+	while (adjust--)
+		reverse_rotate(src, c);
 }
+
+// void	re_adjust(t_list **src, int c)
+// {
+// 	while ((*src)->size == ft_lstlast(*src)->size)
+// 		reverse_rotate(src, c);
+// }
+
 void	sort_a(t_list **stacka, t_list **stackb, int size)
 {
-	printing(*stacka, *stackb);
 	if (size == 2)
 		sort_two(stacka);
 	else if (size == 3)
 		sort_three(stacka);
 	else if (size > 3)
 	{
-		spliting(stacka, stackb, size);
+		spliting(stacka, stackb, size, 'a');
+		// re_adjust(stacka, 'a');
+		printing(*stacka, *stackb);
 		sort_a(stacka, stackb, (size / 2));
-		// sort_b(stackb, stacka, (size / 2));
+		sort_b(stackb, stacka, (size / 2));
 	}
 }
 
 void	sort_b(t_list **stackb, t_list **stacka, int size)
 {
-	int	whole_stack;
-	int	median;
-	int	i;
-	int	count_rotate;
-
-	count_rotate = 0;
-	whole_stack = ft_lstsize(*stacka) + ft_lstsize(*stackb);
-	median = (whole_stack + 1 - size - ((size / 2) + (size % 2)));
-	i = 0;
-	printf("\nB: |size: %d| ", size);
-	printf("|median: %d| \n", median);
-	printing(*stacka, *stackb);
 	if (size == 2)
-		sort_two(stacka);
+		sort_two(stackb);
 	else if (size == 3)
-		sort_three(stacka);
+		sort_three(stackb);
 	else if (size > 3)
 	{
-		while (i++ < size)
-		{
-			if ((*stackb)->index > median)
-				push(stackb, stacka, 'a');
-			else
-			{
-				rotate(stackb, 'b');
-				count_rotate++;
-			}
-		}
-		while (count_rotate--)
-			reverse_rotate(stackb, 'b');
-		// sort_a(stacka, stackb, (size / 2) + (size % 2));
-		// sort_b(stackb, stacka, (size / 2) + (size % 2));
+		spliting(stackb, stacka, size, 'b');
+		// re_adjust(stackb, 'b');
+		printing(*stacka, *stackb);
+		// sort_b(stackb, stacka, (size / 2));
+		// sort_a(stacka, stackb, (size / 2));
 	}
 }
 
@@ -102,7 +102,10 @@ void	sort_stacks(t_list **stacka, t_list **stackb)
 	else if (size == 5)
 		sort_five(stacka, stackb);
 	else
+	{
 		sort_a(stacka, stackb, size);
+		// sort_b(stackb, stacka, size);
+	}
 }
 
 void	printing(t_list *stacka, t_list *stackb)
