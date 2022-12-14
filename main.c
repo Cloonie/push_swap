@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/13 23:12:20 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/15 01:05:08 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@ void	spliting(t_list **src, t_list **dst, int size, int c)
 	int	median;
 	int	total_stacks;
 	int	adjust;
+	int	i;
 	static int recursive;
 
 	recursive++;
 	total_stacks = ft_lstsize(*src) + ft_lstsize(*dst);
-	median = total_stacks - (size / 2);
+	median = total_stacks - ((size / 2) + (size % 2));
 	adjust = 0;
 
 	printf("\n|Size: %d| ", size);
 	printf("|Median: %d| ", median);
 	printf("|Recursion No: %d| \n", recursive);
-	// printing(*src, *dst);
+	printing(*src, *dst);
 
-	while (size--)
+	i = 0;
+	while (i++ <= size && *src)
 	{
 		if ((*src)->index <= median
 			&& ((*src)->size == median || (*src)->size == total_stacks))
@@ -50,14 +52,10 @@ void	spliting(t_list **src, t_list **dst, int size, int c)
 		reverse_rotate(src, c);
 }
 
-// void	re_adjust(t_list **src, int c)
-// {
-// 	while ((*src)->size == ft_lstlast(*src)->size)
-// 		reverse_rotate(src, c);
-// }
-
 void	sort_a(t_list **stacka, t_list **stackb, int size)
 {
+	static int i;
+	printf("\nSORTA NO: %d, SIZE: %d", ++i, size);
 	if (size == 2)
 		sort_two(stacka);
 	else if (size == 3)
@@ -65,15 +63,16 @@ void	sort_a(t_list **stacka, t_list **stackb, int size)
 	else if (size > 3)
 	{
 		spliting(stacka, stackb, size, 'a');
-		// re_adjust(stacka, 'a');
-		printing(*stacka, *stackb);
-		sort_a(stacka, stackb, (size / 2));
-		sort_b(stackb, stacka, (size / 2));
+		// printing(*stacka, *stackb);
+		sort_a(stacka, stackb, (size / 2) + (size % 2));
+		sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
 }
 
 void	sort_b(t_list **stackb, t_list **stacka, int size)
 {
+	static int i;
+	printf("\nSORTB NO: %d, SIZE: %d", ++i, size);
 	if (size == 2)
 		sort_two(stackb);
 	else if (size == 3)
@@ -81,10 +80,9 @@ void	sort_b(t_list **stackb, t_list **stacka, int size)
 	else if (size > 3)
 	{
 		spliting(stackb, stacka, size, 'b');
-		// re_adjust(stackb, 'b');
-		printing(*stacka, *stackb);
-		// sort_b(stackb, stacka, (size / 2));
-		// sort_a(stacka, stackb, (size / 2));
+		// printing(*stacka, *stackb);
+		// sort_a(stacka, stackb, (size / 2) + (size % 2));
+		// sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
 }
 
@@ -104,7 +102,7 @@ void	sort_stacks(t_list **stacka, t_list **stackb)
 	else
 	{
 		sort_a(stacka, stackb, size);
-		// sort_b(stackb, stacka, size);
+		sort_b(stackb, stacka, size);
 	}
 }
 
@@ -144,6 +142,6 @@ int	main(int ac, char **av)
 	set_size(stacka, ft_lstsize(stacka));
 	sort_stacks(&stacka, &stackb);
 
-	// printing(stacka, stackb);
+	printing(stacka, stackb);
 	// system("leaks push_swap");
 }
