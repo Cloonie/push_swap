@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/16 13:15:43 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/16 18:07:12 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	median(t_list **stack, t_info *info, int size)
+{
+	info->last_median = info->median;
+	info->median = info->both_stacks - ((size / 2) + (size % 2));
+	info->chunk_size = info->median - info->last_median;
+	info->high = info->median;
+	info->low = info->high - info->chunk_size + 1;
+}
 
 void	spliting(t_list **src, t_list **dst, int size, int c)
 {
@@ -18,16 +27,13 @@ void	spliting(t_list **src, t_list **dst, int size, int c)
 	int	total_stacks;
 	int	adjust;
 	int	i;
-	static int recursive;
 
-	recursive++;
 	total_stacks = ft_lstsize(*src) + ft_lstsize(*dst);
 	median = total_stacks - ((size / 2) + (size % 2));
 	adjust = 0;
 
 	printf("\n|Size: %d| ", size);
 	printf("|Median: %d| ", median);
-	printf("|Recursion No: %d| \n", recursive);
 	printing(*src, *dst);
 
 	i = 0;
@@ -54,8 +60,7 @@ void	spliting(t_list **src, t_list **dst, int size, int c)
 
 void	sort_a(t_list **stacka, t_list **stackb, int size)
 {
-	static int i;
-	printf("\nSORTA NO: %d, SIZE: %d", ++i, size);
+	median(stacka, stackb, size);
 	if (size == 2)
 		sort_two(stacka);
 	else if (size == 3)
@@ -67,13 +72,10 @@ void	sort_a(t_list **stacka, t_list **stackb, int size)
 		sort_a(stacka, stackb, (size / 2) + (size % 2));
 		sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
-	printf("\nAFTERSORTA NO: %d, SIZE: %d", ++i, size);
 }
 
 void	sort_b(t_list **stackb, t_list **stacka, int size)
 {
-	static int i;
-	printf("\nSORTB NO: %d, SIZE: %d", ++i, size);
 	if (size == 2)
 		sort_two(stackb);
 	else if (size == 3)
@@ -88,14 +90,13 @@ void	sort_b(t_list **stackb, t_list **stacka, int size)
 		// sort_a(stacka, stackb, (size / 2) + (size % 2));
 		// sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
-	printf("\nAFTERSORTB NO: %d, SIZE: %d", ++i, size);
 }
 
-void	sort_stacks(t_list **stacka, t_list **stackb)
+void	sort_stacks(t_list **stacka, t_list **stackb, t_info *info)
 {
 	int	size;
 
-	size = ft_lstsize(*stacka);
+	size = info->both_stacks;
 	if (is_sorted(stacka))
 		return ;
 	else if (size == 2)
@@ -118,7 +119,7 @@ void	printing(t_list *stacka, t_list *stackb)
 		printf("NULL\n");
 	while (stacka)
 	{
-		printf("Value: %2d, Index: %2d, Size: %2d\n",
+		printf("Value: %3d, Index: %3d, Size: %3d\n",
 			stacka->value, stacka->index, stacka->size);
 		stacka = stacka->next;
 	}
@@ -127,7 +128,7 @@ void	printing(t_list *stacka, t_list *stackb)
 		printf("NULL\n");
 	while (stackb)
 	{
-		printf("Value: %2d, Index: %2d, Size: %2d\n",
+		printf("Value: %3d, Index: %3d, Size: %3d\n",
 			stackb->value, stackb->index, stackb->size);
 		stackb = stackb->next;
 	}
@@ -137,15 +138,18 @@ int	main(int ac, char **av)
 {
 	t_list	*stacka;
 	t_list	*stackb;
+	t_info	*info;
 
 	stackb = NULL;
+	info = NULL;
 	if (ac == 1)
 		exit (0);
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
 	assign_index(stacka);
 	set_size(stacka, ft_lstsize(stacka));
-	sort_stacks(&stacka, &stackb);
+	info->both_stacks = stacka->size;
+	sort_stacks(&stacka, &stackb, info);
 
 	printing(stacka, stackb);
 	// system("leaks push_swap");

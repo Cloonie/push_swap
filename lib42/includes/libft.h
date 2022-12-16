@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/08 21:07:52 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/16 17:47:20 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,17 @@ typedef struct s_list
 	int				size;
 	int				pos;
 	struct s_list	*next;
-}					t_list;
+}	t_list;
+
+typedef struct s_info
+{
+	int	both_stacks;
+	int	last_median;
+	int	chunk_size;
+	int	high;
+	int	median;
+	int	low;
+}	t_info;
 
 // MANDATORY
 long	ft_atoi(const char *str);

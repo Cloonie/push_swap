@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/13 12:12:23 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/16 17:46:17 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	swap(t_list **head, int c);
 void	rotate(t_list **stack, int c);
 void	reverse_rotate(t_list **stack, int c);
 void	push(t_list **from, t_list **pushto, int c);
-void	ss(t_list **stacka, t_list **stackb, int c);
-void	rr(t_list **stacka, t_list **stackb, int c);
-void	rrr(t_list **stacka, t_list **stackb, int c);
 
 // sort.c
 int		is_sorted(t_list **stack);
@@ -50,5 +47,6 @@ void	sort_b(t_list **stackb, t_list **stacka, int size);
 void	spliting(t_list **src, t_list **dst, int size, int c);
 void	re_adjust(t_list **src, int c);
 
+void	set_info(t_list *stacka, t_info *info);
 void	printing(t_list *stacka, t_list *stackb);
 #endif
