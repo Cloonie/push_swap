@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/15 01:05:08 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/16 12:48:41 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	sort_a(t_list **stacka, t_list **stackb, int size)
 		sort_a(stacka, stackb, (size / 2) + (size % 2));
 		sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
+	printf("\nAFTERSORTA NO: %d, SIZE: %d", ++i, size);
 }
 
 void	sort_b(t_list **stackb, t_list **stacka, int size)
@@ -76,7 +77,10 @@ void	sort_b(t_list **stackb, t_list **stacka, int size)
 	if (size == 2)
 		sort_two(stackb);
 	else if (size == 3)
+	{
 		sort_three(stackb);
+		spliting(stackb, stacka, size, 'b');
+	}
 	else if (size > 3)
 	{
 		spliting(stackb, stacka, size, 'b');
@@ -84,6 +88,7 @@ void	sort_b(t_list **stackb, t_list **stacka, int size)
 		// sort_a(stacka, stackb, (size / 2) + (size % 2));
 		// sort_b(stackb, stacka, (size / 2) + (size % 2));
 	}
+	printf("\nAFTERSORTB NO: %d, SIZE: %d", ++i, size);
 }
 
 void	sort_stacks(t_list **stacka, t_list **stackb)
@@ -113,7 +118,7 @@ void	printing(t_list *stacka, t_list *stackb)
 		printf("NULL\n");
 	while (stacka)
 	{
-		printf("Value: %d, Index: %d, Size: %d\n",
+		printf("Value: %2d, Index: %2d, Size: %2d\n",
 			stacka->value, stacka->index, stacka->size);
 		stacka = stacka->next;
 	}
@@ -122,7 +127,7 @@ void	printing(t_list *stacka, t_list *stackb)
 		printf("NULL\n");
 	while (stackb)
 	{
-		printf("Value: %d, Index: %d, Size: %d\n",
+		printf("Value: %2d, Index: %2d, Size: %2d\n",
 			stackb->value, stackb->index, stackb->size);
 		stackb = stackb->next;
 	}
