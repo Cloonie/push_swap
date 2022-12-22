@@ -3,92 +3,202 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/16 18:07:12 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/22 21:53:04 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	median(t_list **stack, t_info *info, int size)
+int	low_index(t_list **stack)
 {
-	info->last_median = info->median;
-	info->median = info->both_stacks - ((size / 2) + (size % 2));
-	info->chunk_size = info->median - info->last_median;
-	info->high = info->median;
-	info->low = info->high - info->chunk_size + 1;
+	t_list	*tmp;
+	int		low;
+
+	tmp = *stack;
+	low = INT_MAX;
+	while (tmp)
+	{
+		if (tmp->index < low)
+			low = tmp->index;
+		tmp = tmp->next;
+	}
+	return (low);
 }
 
-void	spliting(t_list **src, t_list **dst, int size, int c)
+int	max_index(t_list **stack)
 {
-	int	median;
-	int	total_stacks;
-	int	adjust;
-	int	i;
+	t_list	*tmp;
+	int		max;
 
-	total_stacks = ft_lstsize(*src) + ft_lstsize(*dst);
-	median = total_stacks - ((size / 2) + (size % 2));
-	adjust = 0;
-
-	printf("\n|Size: %d| ", size);
-	printf("|Median: %d| ", median);
-	printing(*src, *dst);
-
-	i = 0;
-	while (i++ <= size && *src)
+	tmp = *stack;
+	max = INT_MIN;
+	while (tmp)
 	{
-		if ((*src)->index <= median
-			&& ((*src)->size == median || (*src)->size == total_stacks))
+		if (tmp->index > max)
+			max = tmp->index;
+		tmp = tmp->next;
+	}
+	return (max);
+}
+
+void	median(t_list **stack, t_info *info, int size)
+{
+	(void)(*stack);
+	info->btm_half_len = (size / 2) + (size % 2);
+	info->top_half_len = (size / 2);
+	if (info->stack == 'a')
+		info->median = low_index(stack) + info->top_half_len;
+	if (info->stack == 'b' && max_index(stack) > size)
+		info->median = max_index(stack) - info->btm_half_len + 1;
+	else if (info->stack == 'b' && max_index(stack) <= size)
+		info->median = max_index(stack) - info->btm_half_len + 1;
+}
+
+int	check_chunk(t_list **stack, t_info *info)
+{
+	t_list	*tmp;
+
+	tmp = *stack;
+	while (tmp)
+	{
+		if ((info->stack == 'a' && tmp->index < info->median)
+				|| (info->stack == 'b' && tmp->index >= info->median))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	spliting(t_list **src, t_list **dst, t_info *info)
+{
+	while (check_chunk(src, info))
+	{
+		if (info->stack == 'a' && (*src)->index < info->median)
 		{
-			(*src)->size = median;
-			if (c == 'a')
-				push(src, dst, 'b');
-			else if (c == 'b')
-				push(src, dst, 'a');
+			(*src)->size = info->median;
+			push(src, dst, 'b');
+		}
+		else if (info->stack == 'b' && (*src)->index >= info->median)
+		{
+			// (*src)->size = info->median;
+			push(src, dst, 'a');
 		}
 		else
 		{
-			rotate(src, c);
-			adjust++;
+			rotate(src, info->stack);
+			info->rotates++;
 		}
 	}
-	while (adjust--)
-		reverse_rotate(src, c);
-}
-
-void	sort_a(t_list **stacka, t_list **stackb, int size)
-{
-	median(stacka, stackb, size);
-	if (size == 2)
-		sort_two(stacka);
-	else if (size == 3)
-		sort_three(stacka);
-	else if (size > 3)
+	while (info->rotates)
 	{
-		spliting(stacka, stackb, size, 'a');
-		// printing(*stacka, *stackb);
-		sort_a(stacka, stackb, (size / 2) + (size % 2));
-		sort_b(stackb, stacka, (size / 2) + (size % 2));
+		reverse_rotate(src, info->stack);
+		info->rotates--;
 	}
 }
 
-void	sort_b(t_list **stackb, t_list **stacka, int size)
+void	sort3(t_list **src, t_list **dst, int one, int two)
 {
+	if (is_sorted(src))
+		return ;
+	// 1 3 2
+	if ((*src)->next->index > (*src)->next->next->index
+			&& (*src)->next->next->index > (*src)->index)
+	{
+		push(src, dst, two);
+		swap(src, one);
+		push(dst, src, one);
+	}
+	// 2 1 3
+	else if ((*src)->next->next->index > (*src)->index
+			&& (*src)->index > (*src)->next->index)
+		swap(src, one);
+	// 2 3 1
+	else if ((*src)->next->index > (*src)->index
+			&& (*src)->index > (*src)->next->next->index)
+	{
+		push(src, dst, two);
+		swap(src, one);
+		push(dst, src, one);
+		swap(src, one);
+	}
+	// 3 1 2
+	else if ((*src)->index > (*src)->next->next->index
+			&& (*src)->next->next->index > (*src)->next->index)
+	{
+		swap(src, one);
+		push(src, dst, two);
+		swap(src, one);
+		push(dst, src, one);
+	}
+	// 3 2 1 > 2 3 1 > ? 3 1 > ? 1 3 > 2 1 3 > 1 2 3
+	else
+	{
+		swap(src, one);
+		push(src, dst, two);
+		swap(src, one);
+		push(dst, src, one);
+		swap(src, one);
+	}
+}
+
+void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size)
+{
+	info->stack = 'a';
+	if (is_sorted(stacka))
+	{
+		printf("RETURNEDDDDDDDDDDDDD\n");
+		return ;
+	}
+	median(stacka, info, size);
+	printing(*stacka, *stackb, info, size);
 	if (size == 2)
-		sort_two(stackb);
+	{
+		if ((*stacka)->index > (*stacka)->next->index)
+			swap(stacka, 'a');
+		return ;
+	}
 	else if (size == 3)
 	{
-		sort_three(stackb);
-		spliting(stackb, stacka, size, 'b');
+		if (size == ft_lstsize(*stacka))
+			sort_three(stacka);
+		else
+			sort3(stacka, stackb, 'a', 'b');
+		return ;
 	}
 	else if (size > 3)
 	{
-		spliting(stackb, stacka, size, 'b');
-		// printing(*stacka, *stackb);
-		// sort_a(stacka, stackb, (size / 2) + (size % 2));
-		// sort_b(stackb, stacka, (size / 2) + (size % 2));
+		spliting(stacka, stackb, info);
+		sort_a(stacka, stackb, info, (size / 2) + (size % 2));
+		sort_b(stackb, stacka, info, (size / 2));
+	}
+}
+
+void	sort_b(t_list **stackb, t_list **stacka, t_info *info, int size)
+{
+	info->stack = 'b';
+	median(stackb, info, size);
+	printing(*stacka, *stackb, info, size);
+	if (size == 2)
+	{
+		if ((*stackb)->index < (*stackb)->next->index)
+			swap(stackb, 'b');
+		push(stackb, stacka, 'a');
+		push(stackb, stacka, 'a');
+		return ;
+	}
+	else if (size == 3)
+	{
+		sort3(stackb, stacka, 'b', 'a');
+		return ;
+	}
+	else if (size > 3)
+	{
+		spliting(stackb, stacka, info);
+		sort_a(stacka, stackb, info, (size / 2) + (size % 2));
+		sort_b(stackb, stacka, info, (size / 2));
 	}
 }
 
@@ -107,13 +217,20 @@ void	sort_stacks(t_list **stacka, t_list **stackb, t_info *info)
 		sort_five(stacka, stackb);
 	else
 	{
-		sort_a(stacka, stackb, size);
-		sort_b(stackb, stacka, size);
+		sort_a(stacka, stackb, info, size);
+		// sort_b(stackb, stacka, info, size);
 	}
 }
 
-void	printing(t_list *stacka, t_list *stackb)
+void	printing(t_list *stacka, t_list *stackb, t_info *info, int size)
 {
+	printf("~~~~~\nstack: %c\n", info->stack);
+	printf("size: %d\n", size);
+	// printf("last_median: %d\n", info->last_median);
+	printf("median: %d\n", info->median);
+	printf("btm_half_len: %d\n", info->btm_half_len);
+	printf("top_half_len: %d\n", info->top_half_len);
+	// printf("chunk_size: %d\n~~~~~\n", info->chunk_size);
 	printf("\nStack A:\n");
 	if (stacka == NULL)
 		printf("NULL\n");
@@ -134,6 +251,23 @@ void	printing(t_list *stacka, t_list *stackb)
 	}
 }
 
+t_info	*init_info(t_info *info, t_list *stacka)
+{
+	info = malloc(sizeof(t_info));
+
+	if (!info)
+		return (NULL);
+	info->both_stacks = ft_lstsize(stacka);
+	info->chunk_size = 0;
+	info->last_median = 0;
+	info->median = 0;
+	info->btm_half_len = 0;
+	info->top_half_len = 0;
+	info->stack = 0;
+	info->rotates = 0;
+	return (info);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stacka;
@@ -148,9 +282,9 @@ int	main(int ac, char **av)
 	check_dup(stacka);
 	assign_index(stacka);
 	set_size(stacka, ft_lstsize(stacka));
-	info->both_stacks = stacka->size;
+	info = init_info(info, stacka);
 	sort_stacks(&stacka, &stackb, info);
 
-	printing(stacka, stackb);
+	printing(stacka, stackb, info, 0);
 	// system("leaks push_swap");
 }

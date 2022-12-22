@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/16 17:47:20 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/21 16:01:19 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ typedef struct s_list
 typedef struct s_info
 {
 	int	both_stacks;
+	int	stack;
+	int rotates;
 	int	last_median;
 	int	chunk_size;
-	int	high;
 	int	median;
-	int	low;
+	int	btm_half_len;
+	int	top_half_len;
 }	t_info;
 
 // MANDATORY

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/16 17:46:17 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/21 20:33:35 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	sort_five(t_list **stacka, t_list **stackb);
 void	quick_sort_a(t_list **stacka, t_list **stackb, int size);
 void	quick_sort_b(t_list **stackb, t_list **stacka, int size);
 
-void	sort_a(t_list **stacka, t_list **stackb, int size);
-void	sort_b(t_list **stackb, t_list **stacka, int size);
-void	spliting(t_list **src, t_list **dst, int size, int c);
+void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size);
+void	sort_b(t_list **stackb, t_list **stacka, t_info *info, int size);
+void	spliting(t_list **src, t_list **dst, t_info *info);
 void	re_adjust(t_list **src, int c);
 
 void	set_info(t_list *stacka, t_info *info);
-void	printing(t_list *stacka, t_list *stackb);
+void	printing(t_list *stacka, t_list *stackb, t_info *info, int size);
 #endif
