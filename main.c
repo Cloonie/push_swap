@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 03:32:03 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/23 04:23:34 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	spliting(t_list **src, t_list **dst, t_info *info)
 			info->rotates++;
 		}
 	}
+	if (info->start_rr)
+		info->rotates = 0;
 	while (info->rotates)
 	{
 		reverse_rotate(src, info->stack);
@@ -74,6 +76,7 @@ void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size)
 
 void	sort_b(t_list **stackb, t_list **stacka, t_info *info, int size)
 {
+	info->start_rr = 0;
 	info->stack = 'b';
 	median(stackb, info, size);
 	// printing(*stacka, *stackb, info, size);
@@ -135,6 +138,6 @@ int	main(int ac, char **av)
 	info = init_info(info, stacka);
 	sort_stacks(&stacka, &stackb, info);
 
-	printing(stacka, stackb, info, 0);
+	// printing(stacka, stackb, info, 0);
 	// system("leaks push_swap");
 }

@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 03:32:08 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/23 04:42:17 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include "lib42/includes/libft.h"
 # include "lib42/includes/ft_printf.h"
 # include "lib42/includes/get_next_line_bonus.h"
+
+typedef struct s_info
+{
+	int	both_stacks;
+	int	stack;
+	int rotates;
+	int	median;
+	int	btm_half_len;
+	int	top_half_len;
+	int	start_rr;
+}	t_info;
 
 // init.c
 t_list	*bracket_arg(char **av);

@@ -108,5 +108,6 @@ t_info	*init_info(t_info *info, t_list *stacka)
 	info->top_half_len = 0;
 	info->stack = 0;
 	info->rotates = 0;
+	info->start_rr = 1;
 	return (info);
 }

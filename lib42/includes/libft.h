@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 02:31:13 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/23 04:06:55 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ typedef struct s_list
 	int				index;
 	struct s_list	*next;
 }	t_list;
-
-typedef struct s_info
-{
-	int	both_stacks;
-	int	stack;
-	int rotates;
-	int	median;
-	int	btm_half_len;
-	int	top_half_len;
-}	t_info;
 
 // MANDATORY
 long	ft_atoi(const char *str);
