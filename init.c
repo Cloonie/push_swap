@@ -96,14 +96,17 @@ t_list	*assign_index(t_list *stack)
 	return (head);
 }
 
-void	set_size(t_list *stack, int size)
+t_info	*init_info(t_info *info, t_list *stacka)
 {
-	t_list	*tmp;
+	info = malloc(sizeof(t_info));
 
-	tmp = stack;
-	while (tmp)
-	{
-		tmp->size = size;
-		tmp = tmp->next;
-	}
+	if (!info)
+		return (NULL);
+	info->both_stacks = ft_lstsize(stacka);
+	info->median = 0;
+	info->btm_half_len = 0;
+	info->top_half_len = 0;
+	info->stack = 0;
+	info->rotates = 0;
+	return (info);
 }

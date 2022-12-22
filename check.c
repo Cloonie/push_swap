@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:14:42 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/07 19:16:28 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/23 03:19:39 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	errormsg(void)
-{
-	write(2, "Error\n", 6);
-	exit (0);
-}
 
 int	check_num(char *arg)
 {
@@ -68,4 +62,19 @@ void	check_dup(t_list *stack)
 		tmp = tmp->next;
 	}
 	check_dup(stack->next);
+}
+
+int	check_chunk(t_list **stack, t_info *info)
+{
+	t_list	*tmp;
+
+	tmp = *stack;
+	while (tmp)
+	{
+		if ((info->stack == 'a' && tmp->index < info->median)
+				|| (info->stack == 'b' && tmp->index >= info->median))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

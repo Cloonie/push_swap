@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:10:43 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/21 16:01:19 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/23 02:31:13 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ typedef struct s_list
 	void			*content;
 	int				value;
 	int				index;
-	int				low;
-	int				high;
-	int				size;
-	int				pos;
 	struct s_list	*next;
 }	t_list;
 
@@ -35,8 +31,6 @@ typedef struct s_info
 	int	both_stacks;
 	int	stack;
 	int rotates;
-	int	last_median;
-	int	chunk_size;
 	int	median;
 	int	btm_half_len;
 	int	top_half_len;

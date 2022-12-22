@@ -21,10 +21,6 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	lst->value = ft_atoi(content);
 	lst->index = 0;
-	lst->low = 0;
-	lst->high = 0;
-	lst->size = 0;
-	lst->pos = 0;
 	lst->next = NULL;
 	return (lst);
 }
