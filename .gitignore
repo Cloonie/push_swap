@@ -13,6 +13,7 @@ obj
 # Executables
 *.out
 push_swap
+checker
 
 # Temp files
 *.swp
@@ -20,6 +21,7 @@ push_swap
 # Debug files
 *.dSYM/
 
+tmp
 tester
 push_swap_visualizer
 push_swap_tester
