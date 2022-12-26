@@ -56,33 +56,14 @@ void	do_op(t_list **stacka, t_list **stackb, char *op)
 	// printingstack(*stacka, *stackb);
 }
 
-int	check_limit(int steps, int size)
-{
-	if (size == 3 && steps >= 3)
-		return (1);
-	else if (size == 5 && steps >= 12)
-		return (1);
-	else if (size == 100 && steps >= 1500)
-		return (1);
-	else if (size == 500 && steps >= 11500)
-		return (1);
-	return (0);
-}
-
 void	take_op(t_list **stacka, t_list **stackb)
 {
-	// int		steps;
-	// int		size;
 	char	*op;
 
-	// steps = 0;
-	// size = ft_lstsize(*stacka);
 	op = get_next_line(0);
 	while (op)
 	{
 		do_op(stacka, stackb, op);
-		if (is_sorted(stacka) && *stackb == NULL)
-			return ;
 		op = get_next_line(0);
 	}
 }
@@ -98,8 +79,7 @@ int	main(int ac, char **av)
 	stacka = fill_stack(ac, av);
 	check_dup(stacka);
 	assign_index(stacka);
-	if (!is_sorted(&stacka))
-		take_op(&stacka, &stackb);
+	take_op(&stacka, &stackb);
 	if (is_sorted(&stacka) && stackb == NULL)
 		printf("OK\n");
 	else
