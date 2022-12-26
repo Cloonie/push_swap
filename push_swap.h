@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:58:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 04:42:17 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/26 23:57:11 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	errormsg(void);
 int		low_index(t_list **stack);
 int		max_index(t_list **stack);
 
-// check.c
+// validation.c
 int		check_num(char *arg);
 int		check_arg(char *arg);
 void	check_dup(t_list *stack);
@@ -60,7 +60,7 @@ void	sort_five(t_list **stacka, t_list **stackb);
 void	sort3fora(t_list **src, t_list **dst, int one, int two);
 void	sort3forb(t_list **src, t_list **dst, int one, int two);
 
-// main.c
+// large.c
 void	median(t_list **stack, t_info *info, int size);
 void	spliting(t_list **src, t_list **dst, t_info *info);
 void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size);
@@ -69,4 +69,5 @@ void	sort_stacks(t_list **stacka, t_list **stackb, t_info *info);
 
 // print.c
 void	printing(t_list *stacka, t_list *stackb, t_info *info, int size);
+void	printingstack(t_list *stacka, t_list *stackb);
 #endif

@@ -38,3 +38,25 @@ void	printing(t_list *stacka, t_list *stackb, t_info *info, int size)
 		stackb = stackb->next;
 	}
 }
+
+void	printingstack(t_list *stacka, t_list *stackb)
+{
+	printf("\nStack A:\n");
+	if (stacka == NULL)
+		printf("NULL\n");
+	while (stacka)
+	{
+		printf("Value: %3d, Index: %3d\n",
+			stacka->value, stacka->index);
+		stacka = stacka->next;
+	}
+	printf("\nStack B:\n");
+	if (stackb == NULL)
+		printf("NULL\n");
+	while (stackb)
+	{
+		printf("Value: %3d, Index: %3d\n",
+			stackb->value, stackb->index);
+		stackb = stackb->next;
+	}
+}
