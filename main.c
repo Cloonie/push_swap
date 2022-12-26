@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:57:45 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 04:23:34 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/24 16:48:52 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,11 @@ int	main(int ac, char **av)
 	assign_index(stacka);
 	info = init_info(info, stacka);
 	sort_stacks(&stacka, &stackb, info);
+
+	if (is_sorted(&stacka))
+		printf("OK\n");
+	else
+		printf("KO\n");
 
 	// printing(stacka, stackb, info, 0);
 	// system("leaks push_swap");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:50:18 by mliew             #+#    #+#             */
-/*   Updated: 2022/09/17 15:28:22 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/24 16:55:06 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# define BUFFER_SIZE 10
+# include <stdint.h>
+
+# define BUFFER_SIZE 1
 
 char	*get_next_line(int fd);
 
