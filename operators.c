@@ -6,7 +6,7 @@
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 03:10:22 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/28 22:38:22 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	swap(t_list **head, int c)
 	t_list	*tmp;
 	t_list	*next;
 
+	if (!(*head) || !(*head)->next)
+		return ;
 	tmp = *head;
 	*head = (*head)->next;
 	next = (*head)->next;
@@ -33,7 +35,7 @@ void	rotate(t_list **head, int c)
 	t_list	*tmp;
 	t_list	*tail;
 
-	if (!(*head))
+	if (!(*head) || !(*head)->next)
 		return ;
 	tmp = *head;
 	*head = (*head)->next;
@@ -51,6 +53,8 @@ void	reverse_rotate(t_list **head, int c)
 	t_list	*tmp;
 	t_list	*tail;
 
+	if (!(*head) || !(*head)->next)
+		return ;
 	tail = ft_lstlast(*head);
 	tmp = *head;
 	while (tmp->next->next)
@@ -68,6 +72,8 @@ void	push(t_list **from, t_list **pushto, int c)
 {
 	t_list	*tmp;
 
+	if (!from || !pushto)
+		return ;
 	tmp = *from;
 	*from = (*from)->next;
 	tmp->next = *pushto;

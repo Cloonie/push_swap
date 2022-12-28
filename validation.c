@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:14:42 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/23 03:19:39 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/28 21:59:30 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_sorted(t_list **stack)
+{
+	t_list	*current;
+	t_list	*tmp;
+
+	current = *stack;
+	while (current)
+	{
+		tmp = (current)->next;
+		while (tmp)
+		{
+			if ((current)->index < tmp->index)
+				tmp = tmp->next;
+			else
+				return (0);
+		}
+		current = (current)->next;
+	}
+	return (1);
+}
 
 int	check_num(char *arg)
 {
@@ -72,7 +93,7 @@ int	check_chunk(t_list **stack, t_info *info)
 	while (tmp)
 	{
 		if ((info->stack == 'a' && tmp->index < info->median)
-				|| (info->stack == 'b' && tmp->index >= info->median))
+			|| (info->stack == 'b' && tmp->index >= info->median))
 			return (1);
 		tmp = tmp->next;
 	}

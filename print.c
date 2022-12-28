@@ -14,26 +14,26 @@
 
 void	printing(t_list *stacka, t_list *stackb, t_info *info, int size)
 {
-	printf("~~~~~\nstack: %c\n", info->stack);
-	printf("size: %d\n", size);
-	printf("median: %d\n", info->median);
-	printf("btm_half_len: %d\n", info->btm_half_len);
-	printf("top_half_len: %d\n", info->top_half_len);
-	printf("\nStack A:\n");
+	ft_printf("~~~~~\nstack: %c\n", info->stack);
+	ft_printf("size: %d\n", size);
+	ft_printf("median: %d\n", info->median);
+	ft_printf("btm_half_len: %d\n", info->btm_half_len);
+	ft_printf("top_half_len: %d\n", info->top_half_len);
+	ft_printf("\nStack A:\n");
 	if (stacka == NULL)
-		printf("NULL\n");
+		ft_printf("NULL\n");
 	while (stacka)
 	{
-		printf("Value: %3d, Index: %3d\n",
+		ft_printf("Value: %3d, Index: %3d\n",
 			stacka->value, stacka->index);
 		stacka = stacka->next;
 	}
-	printf("\nStack B:\n");
+	ft_printf("\nStack B:\n");
 	if (stackb == NULL)
-		printf("NULL\n");
+		ft_printf("NULL\n");
 	while (stackb)
 	{
-		printf("Value: %3d, Index: %3d\n",
+		ft_printf("Value: %3d, Index: %3d\n",
 			stackb->value, stackb->index);
 		stackb = stackb->next;
 	}
@@ -41,21 +41,21 @@ void	printing(t_list *stacka, t_list *stackb, t_info *info, int size)
 
 void	printingstack(t_list *stacka, t_list *stackb)
 {
-	printf("\nStack A:\n");
+	ft_printf("\nStack A:\n");
 	if (stacka == NULL)
-		printf("NULL\n");
+		ft_printf("NULL\n");
 	while (stacka)
 	{
-		printf("Value: %3d, Index: %3d\n",
+		ft_printf("Value: %3d, Index: %3d\n",
 			stacka->value, stacka->index);
 		stacka = stacka->next;
 	}
-	printf("\nStack B:\n");
+	ft_printf("\nStack B:\n");
 	if (stackb == NULL)
-		printf("NULL\n");
+		ft_printf("NULL\n");
 	while (stackb)
 	{
-		printf("Value: %3d, Index: %3d\n",
+		ft_printf("Value: %3d, Index: %3d\n",
 			stackb->value, stackb->index);
 		stackb = stackb->next;
 	}

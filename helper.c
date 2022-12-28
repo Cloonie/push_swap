@@ -49,3 +49,39 @@ int	max_index(t_list **stack)
 	}
 	return (max);
 }
+
+void	sort_three(t_list **stacka)
+{
+	if (is_sorted(stacka))
+		return ;
+	if (((*stacka)->index < (*stacka)->next->index
+			&& (*stacka)->index < (*stacka)->next->next->index))
+	{
+		swap(stacka, 'a');
+		rotate(stacka, 'a');
+	}
+	if ((*stacka)->index > (*stacka)->next->index
+		&& (*stacka)->index > (*stacka)->next->next->index)
+		rotate(stacka, 'a');
+	if ((*stacka)->index > (*stacka)->next->index)
+		swap(stacka, 'a');
+	if ((*stacka)->index < (*stacka)->next->index
+		&& (*stacka)->index > (*stacka)->next->next->index)
+		reverse_rotate(stacka, 'a');
+}
+
+void	sort_five(t_list **stacka, t_list **stackb)
+{
+	while (ft_lstsize(*stacka) != 3)
+	{
+		if ((*stacka)->index < 3)
+			push(stacka, stackb, 'b');
+		else
+			rotate(stacka, 'a');
+	}
+	sort_three(stacka);
+	if ((*stackb)->index < (*stackb)->next->index)
+		swap(stackb, 'b');
+	push(stackb, stacka, 'a');
+	push(stackb, stacka, 'a');
+}

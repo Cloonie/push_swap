@@ -20,6 +20,7 @@ t_list	*bracket_arg(char **av)
 	int		i;
 
 	i = 0;
+	head = NULL;
 	array = ft_split(av[1], ' ');
 	if (!array[i])
 		exit (0);
@@ -37,25 +38,12 @@ t_list	*fill_stack(int ac, char **av)
 {
 	t_list	*head;
 	t_list	*tmp;
-	char	**array;
 	int		i;
 
 	i = 0;
 	head = NULL;
 	if (ac == 2)
-	{
-		array = ft_split(av[1], ' ');
-		if (!array[i])
-			exit (0);
-		while (array[i] != NULL)
-		{
-			if (!check_arg(array[i]))
-				errormsg();
-			tmp = ft_lstnew(array[i++]);
-			ft_lstadd_back(&head, tmp);
-		}
-		return (head);
-	}
+		return (bracket_arg(av));
 	while (++i < ac)
 	{
 		if (!check_arg(av[i]))
@@ -66,16 +54,14 @@ t_list	*fill_stack(int ac, char **av)
 	return (head);
 }
 
-t_list	*assign_index(t_list *stack)
+t_list	*assign_index(t_list *stack, int i)
 {
-	t_list			*head;
-	t_list			*biggest_value;
-	long long int	max_int;
-	int				index;
+	t_list	*head;
+	t_list	*biggest_value;
+	long	max_int;
 
 	head = stack;
-	index = ft_lstsize(stack) + 1;
-	while (--index > 0)
+	while (--i > 0)
 	{
 		max_int = LLONG_MIN;
 		stack = head;
@@ -91,7 +77,7 @@ t_list	*assign_index(t_list *stack)
 			stack = stack->next;
 		}
 		if (!(biggest_value->index))
-			biggest_value->index = index;
+			biggest_value->index = i;
 	}
 	return (head);
 }
@@ -99,7 +85,6 @@ t_list	*assign_index(t_list *stack)
 t_info	*init_info(t_info *info, t_list *stacka)
 {
 	info = malloc(sizeof(t_info));
-
 	if (!info)
 		return (NULL);
 	info->both_stacks = ft_lstsize(stacka);

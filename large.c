@@ -53,7 +53,6 @@ void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size)
 	if (is_sorted(stacka))
 		return ;
 	median(stacka, info, size);
-	// printing(*stacka, *stackb, info, size);
 	if (size == 2)
 	{
 		if ((*stacka)->index > (*stacka)->next->index)
@@ -64,7 +63,7 @@ void	sort_a(t_list **stacka, t_list **stackb, t_info *info, int size)
 		if (size == ft_lstsize(*stacka))
 			sort_three(stacka);
 		else
-			sort3fora(stacka, stackb, 'a', 'b');
+			sort3_a(stacka, stackb, 'a', 'b');
 	}
 	else if (size > 3)
 	{
@@ -79,7 +78,6 @@ void	sort_b(t_list **stackb, t_list **stacka, t_info *info, int size)
 	info->start_rr = 0;
 	info->stack = 'b';
 	median(stackb, info, size);
-	// printing(*stacka, *stackb, info, size);
 	if (size == 2)
 	{
 		if ((*stackb)->index < (*stackb)->next->index)
@@ -89,7 +87,7 @@ void	sort_b(t_list **stackb, t_list **stacka, t_info *info, int size)
 	}
 	else if (size == 3)
 	{
-		sort3forb(stackb, stacka, 'b', 'a');
+		sort3_b(stackb, stacka, 'b', 'a');
 		push(stackb, stacka, 'a');
 		push(stackb, stacka, 'a');
 		push(stackb, stacka, 'a');

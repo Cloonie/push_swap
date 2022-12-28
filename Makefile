@@ -6,7 +6,7 @@
 #    By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/12/27 00:44:23 by mliew            ###   ########.fr        #
+#    Updated: 2022/12/28 22:56:59 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ RM		=	rm -rf
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 
-SRCS	=	mandatory.c operators.c init.c validation.c sort.c print.c help.c sort3.c large.c
-OBJS	=	$(SRCS:.c=.o)
+SRC	=	mandatory.c operators.c init.c validation.c helper.c sort3.c large.c print.c
+OBJS	=	$(SRC:.c=.o)
 
-BSRCS	=	bonus.c operators.c init.c validation.c sort.c print.c help.c sort3.c large.c
-BOBJS	=	$(BSRCS:.c=.o)
+BSRC	=	bonus.c operators.c init.c validation.c helper.c sort3.c large.c print.c
+BOBJS	=	$(BSRC:.c=.o)
 
 LIB42	=	lib42
 LDFLAGS	=	-Llib42
