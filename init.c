@@ -31,6 +31,10 @@ t_list	*bracket_arg(char **av)
 		tmp = ft_lstnew(array[i++]);
 		ft_lstadd_back(&head, tmp);
 	}
+	i = 0;
+	while (array[i])
+		free (array[i++]);
+	free (array);
 	return (head);
 }
 
