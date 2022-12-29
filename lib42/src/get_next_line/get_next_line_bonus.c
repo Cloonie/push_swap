@@ -6,7 +6,7 @@
 /*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:52:03 by mliew             #+#    #+#             */
-/*   Updated: 2022/07/15 15:14:32 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/29 16:49:15 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*read_file(int fd, char *new)
 // then it takes the string until '\n' and returns it
 // it also takes the rest of the string after '\n' in buffer and overwrites 
 // itself so that the next time it continues there as it is a static variable
-// in bonus buffer is a 2d array so it can open multiple fd without clashing each other
+// in bonus buffer is a 2d array so it can open multiple fd
 char	*get_next_line(int fd)
 {
 	static char	*buf[OPEN_MAX];

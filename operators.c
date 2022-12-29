@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:38:01 by mliew             #+#    #+#             */
-/*   Updated: 2022/12/28 22:38:22 by mliew            ###   ########.fr       */
+/*   Updated: 2022/12/29 16:40:45 by mliew            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	push(t_list **from, t_list **pushto, int c)
 {
 	t_list	*tmp;
 
-	if (!from || !pushto)
+	if (!(*from))
 		return ;
 	tmp = *from;
 	*from = (*from)->next;

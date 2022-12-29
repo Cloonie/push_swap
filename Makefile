@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mliew <mliew@student.42kl.edu.my>          +#+  +:+       +#+         #
+#    By: mliew < mliew@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:21:36 by mliew             #+#    #+#              #
-#    Updated: 2022/12/28 22:56:59 by mliew            ###   ########.fr        #
+#    Updated: 2022/12/29 16:15:20 by mliew            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,6 @@ clean:
 
 fclean: clean
 	make fclean -C $(LIB42)
-	$(RM) push_swap *.o
+	$(RM) push_swap checker *.o
 
 re: fclean all

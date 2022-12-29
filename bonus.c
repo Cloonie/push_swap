@@ -65,6 +65,7 @@ void	take_op(t_list **stacka, t_list **stackb)
 	while (op)
 	{
 		do_op(stacka, stackb, op);
+		free(op);
 		op = get_next_line(0);
 	}
 }
@@ -85,5 +86,4 @@ int	main(int ac, char **av)
 		printf("OK\n");
 	else
 		printf("KO\n");
-	// system("leaks checker");
 }
